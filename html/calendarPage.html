@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+
+    <body>
+        <div id="main">
+            <div id="calendar">
+                <div>{{head}}</div>
+                <table>
+                    <tr>
+                        <td v-for="week in weeks">{{week}}</td>
+                    </tr>
+                    <tr v-for="week in td">
+                        <td v-for="day in week">{{day}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#config-web-app -->
+            <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+
+        <script src="../js/firebase.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="../js/calendarPage.js"></script>
+        <script src="../js/calendar.js"></script>
+    </body>
+</html>
