@@ -5,16 +5,16 @@ const calendar=new Vue({
     el:"#calendar",
     data:{
         head:"",
-        weeks:[""],
-        td:[0]
+        weeks:[],
+        td:[]
     },
     methods:{
         setHead(head){
             this.head=head;
         },
 
-        setWeek(num,week){
-            this.weeks[num]=week;
+        addWeek(week){
+            this.weeks.push(week);
         },
 
         setTd(aweek){
@@ -23,8 +23,30 @@ const calendar=new Vue({
     }
 });
 
+const userData=new Vue({
+    el:".userData",
+    data:{
+        user:{},
+        hidden:true
+    },
+    methods:{
+        initUserData(user){
+            this.user=user;
+            this.hidden=false;
+        },
+
+        getPhotoURL(){
+            return this.user.photoURL;
+        },
+
+        getDisplayName(){
+            return this.user.displayName;
+        }
+    }
+});
+
 firebase.auth().onAuthStateChanged(function(user){
     if(user){
-        console.log(user);//デバッグ用、後で消すこと!!
+        userData.initUserData(user);
     }
 });

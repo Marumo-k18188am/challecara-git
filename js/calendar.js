@@ -22,7 +22,7 @@ var aweek=[];
 calendar.setHead(year+" / "+month);
 
 for(var i=0;i<weeks.length;i++){
-    calendar.setWeek(i,weeks[i]);
+    calendar.addWeek(weeks[i]);
 }
 
 for(var week=0;week<6;week++){
