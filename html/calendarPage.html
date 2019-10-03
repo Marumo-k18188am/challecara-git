@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <title></title>
         <link rel="StyleSheet" href="../css/calendarPage.css">
+        <link rel="StyleSheet" href="../css/calendar.css">
     </head>
 
     <body>
@@ -51,13 +52,18 @@
             </div>
 
             <div id="calendar">
-                <div>{{head}}</div>
+                <div id="calendar-head">
+                    {{head}}
+                    <button v-on:click="toLastMonth()">前の月</button>
+                    <button v-on:click="toThisMonth()">今月</button>
+                    <button v-on:click="toNextMonth()">次の月</button>
+                </div>
                 <table>
                     <tr>
-                        <td v-for="week in weeks">{{week}}</td>
+                        <td class="weeks" v-for="week in weeks" v-bind:class="week.class">{{week.weekname}}</td>
                     </tr>
                     <tr v-for="week in td">
-                        <td v-for="day in week">{{day}}</td>
+                        <td class="days" v-for="day in week" v-bind:class="day.class">{{day.daynum}}</td>
                     </tr>
                 </table>
             </div>
@@ -72,7 +78,8 @@
 
         <script src="../js/firebase.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="../js/calendarPage.js"></script>
         <script src="../js/calendar.js"></script>
+        <script src="../js/calendarPage.js"></script>
+        
     </body>
 </html>
