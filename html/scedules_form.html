@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang = "jp">
+    <head>
+        <meta charset = "UTF-8">
+        <title>Form</title>
+    </head>
+
+    <body>
+        <div id = "form">
+
+            <div id ="title">
+                <p>タイトル</p>
+                <input v-model="title">
+            </div>
+
+            <div id = "date">
+                <p>日付</p>
+                <input v-model = "place">
+            </div>
+
+            <div id = "place">
+                <p>場所</p>
+                <input v-model = "place">
+            </div>
+
+            <div id = "participants">
+                <p>参加者</p>
+                <input v-model = "participants">
+            </div>
+
+            <div id = "comments">
+                <p>コメント</p>
+                <input v-model = "comments">
+            </div>
+
+        </div>
+
+        <script src = "./vue.js"></script>
+        <script src = "../js/scedules_form.js"></script>
+    </body>
+</html>
