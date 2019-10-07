@@ -2,7 +2,7 @@
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-        window.location.href="html/calendar.html";
+        window.location.href="html/calendarPage.html";
     }
 });
 

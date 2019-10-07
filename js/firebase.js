@@ -1,3 +1,5 @@
+"use strict";
+
 var firebaseConfig = {
     apiKey: "AIzaSyAX1wI282pTu3t8dD3C20B5FIclK0hMA9o",
     authDomain: "schedule-ers.firebaseapp.com",

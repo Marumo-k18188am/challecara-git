@@ -5,7 +5,6 @@
         <meta charset="utf-8">
         <title></title>
         <link rel="StyleSheet" href="../css/calendarPage.css">
-        <link rel="StyleSheet" href="../css/calendar.css">
     </head>
 
     <body>
@@ -67,6 +66,12 @@
                     </tr>
                 </table>
             </div>
+
+            <div id="timeschedule">
+                <div id="ts-head">{{head}}</div>
+                <div id="ts-notFound" v-bind:hidden="found">{{notFoundMessage}}</div>
+                <button v-on:click="toSchedulesForm()">予定を追加</button>
+            </div>
         </div>
 
         <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -78,7 +83,6 @@
 
         <script src="../js/firebase.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="../js/calendar.js"></script>
         <script src="../js/calendarPage.js"></script>
         
     </body>

@@ -1,3 +1,4 @@
+/*ページ全般*/
 body{
     color:lightslategray;
     background-color: whitesmoke;
@@ -8,7 +9,8 @@ button{
     background-color: dodgerblue;
     border: 1px solid dodgerblue;
     border-radius: 10%;
-    width: 75px;
+    padding-left: 15px;
+    padding-right: 15px;
     height: 30px;
 }
 
@@ -17,6 +19,7 @@ button:hover{
     background-color:whitesmoke;
 }
 
+/*メニューバー*/
 .menu-item{
     margin:45px auto;
     width:90%;
@@ -30,7 +33,7 @@ button:hover{
 
 #menu{
     float: left;
-    width:300px;
+    width:20%;
     height:100%;
     border: 1px solid dodgerblue;
 }
@@ -56,6 +59,10 @@ button:hover{
 #menu li>.notnowhere{
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
+}
+
+#menu li>.notnowhere:hover{
+    border: 1px solid dodgerblue;
 }
 
 #menu li img{
@@ -85,4 +92,74 @@ button:hover{
 
 #menu-username{
     font-size: 28px;
+}
+
+/*カレンダー*/
+#calendar{
+    float:left;
+    margin-left: 30px;
+}
+
+#calendar table{
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+#calendar td{
+    user-select: none;
+    padding-right: 90px;
+}
+
+#calendar-head{
+    font-size: 57px;
+    margin-bottom: 45px;
+}
+
+.weeks{
+    font-size: 20px;
+}
+
+.days{
+    font-size: 24px;
+    padding-bottom:57px;
+    border: 1px solid dodgerblue;
+}
+
+.days:hover{
+    background-color:#beeeff;
+}
+
+.today{
+    background-color:palegoldenrod;
+    border: 2px solid dodgerblue;
+}
+
+.sunday{
+    color:red;
+}
+
+.saturday{
+    color:blue;
+}
+
+/*タイムスケジュール*/
+#timeschedule{
+    float: right;
+    width: 20%;
+    height:100%;
+    border:1px solid dodgerblue;
+}
+
+#ts-head{
+    margin-top:5px;
+    margin-left:5px;
+    width:90%;
+    font-size:24px;
+    border-bottom: 1px solid lightgray;
+}
+
+#ts-notFound{
+    padding-top: 100px;
+    padding-bottom: 100px;
+    font-size:24px;
 }
