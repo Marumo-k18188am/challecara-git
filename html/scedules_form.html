@@ -7,35 +7,29 @@
 
     <body>
         <div id = "form">
-
-            <div id ="title">
-                <p>タイトル</p>
-                <input v-model="title">
+            <button v-on:click="addScedule()">追加</button>
+            <div>
+                <input type="text" v-model="title" placeholder="予定の名前">
             </div>
 
-            <div id = "date">
-                <p>日付</p>
-                <input v-model = "place">
+            <div>
+                <input type="time" v-model = "time">
             </div>
 
-            <div id = "place">
-                <p>場所</p>
-                <input v-model = "place">
+            <div>
+                <input v-model = "place" placeholder="場所">
+            </div>
+            <div>
+                <input v-model = "participants" placeholder="参加者">
             </div>
 
-            <div id = "participants">
-                <p>参加者</p>
-                <input v-model = "participants">
-            </div>
-
-            <div id = "comments">
-                <p>コメント</p>
-                <input v-model = "comments">
+            <div>
+                <input v-model = "comment" placeholder="コメント">
             </div>
 
         </div>
 
-        <script src = "./vue.js"></script>
+        <script src = "../js/vue.js"></script>
         <script src = "../js/scedules_form.js"></script>
     </body>
 </html>
