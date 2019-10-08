@@ -31,19 +31,18 @@ const vm = new Vue({
 
     methods: {
         addSchedule: function(){
-            db.collection("users").doc(uid).set({
+            db.collection("users").doc(uid).collection("schedules").doc(this.date).set({
                 title: this.title,
                 time: this.time,
                 place: this.place,
                 participants: this.participants,
                 comment: this.comment,
-                })
+            })
             // .then(function(docRef) {
             //     console.log("Document written with ID: ", Ref.id);
             // })
             // .catch(function(error) {
             //     console.error("Error adding document: ", error);
-            });
         },
     }
 })
