@@ -1,15 +1,25 @@
-//デバッグ用
+//サーバーサイド
 
 var http=require("http");
 var fs=require("fs");
+var url=require("url");
 
 http.createServer(function(req,res){
-    var url=req.url;
-    var tmp=url.split(".");
-    var type="";
+    var requrl=req.url;
+    var tmp;
+    var type;
+    var queries;
+
+    //クエリパラメータ処理
+    queries=url.parse(requrl,true).query;
+    if(queries)requrl=requrl.split("?")[0];
+
+    //ファイルリクエスト処理
+    tmp=requrl.split(".");
+    type="";
     switch(tmp[tmp.length-1]){
         case "/":
-            url="/index.html";
+            requrl="/index.html";
             type="text/html";
             break;
         
@@ -22,7 +32,7 @@ http.createServer(function(req,res){
             break;
     }
     
-    fs.readFile(__dirname+url, function(err,data){
+    fs.readFile(__dirname+requrl, function(err,data){
         res.writeHead(200,{"Content-Type":type});
         res.end(data);
     })
