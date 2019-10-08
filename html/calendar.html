@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <title></title>
-        <link rel="StyleSheet" href="../css/calendarPage.css">
+        <link rel="StyleSheet" href="../css/calendar.css">
     </head>
 
     <body>
@@ -62,7 +62,7 @@
                         <td class="weeks" v-for="week in weeks" v-bind:class="week.class">{{week.weekname}}</td>
                     </tr>
                     <tr v-for="week in td">
-                        <td class="days" v-for="day in week" v-bind:class="day.class">{{day.daynum}}</td>
+                        <td class="days" v-for="day in week" v-bind:class="day.class" v-on:click="tdClicked(day.date.year,day.date.month,day.date.day)">{{day.daynum}}</td>
                     </tr>
                 </table>
             </div>
@@ -70,7 +70,7 @@
             <div id="timeschedule">
                 <div id="ts-head">{{head}}</div>
                 <div id="ts-notFound" v-bind:hidden="found">{{notFoundMessage}}</div>
-                <button v-on:click="toSchedulesForm()">予定を追加</button>
+                <button v-on:click="toSchedulesForm">予定を追加</button>
             </div>
         </div>
 
@@ -83,7 +83,7 @@
 
         <script src="../js/firebase.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="../js/calendarPage.js"></script>
+        <script src="../js/calendar.js"></script>
         
     </body>
 </html>
