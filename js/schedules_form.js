@@ -3,6 +3,7 @@
 var db = firebase.firestore();
 
 var name, email, photoUrl, emailVerified, uid;
+var date
 
 firebase.auth().onAuthStateChanged(function(user){
     if(user){
@@ -20,6 +21,7 @@ firebase.auth().onAuthStateChanged(function(user){
 const vm = new Vue({
     el: '#form',
     data: {
+        date: '',
         title: '',
         time: '',
         place: '',
@@ -29,18 +31,18 @@ const vm = new Vue({
 
     methods: {
         addSchedule: function(){
-            db.collection("users").add({
+            db.collection("users").doc(uid).set({
                 title: this.title,
                 time: this.time,
                 place: this.place,
                 participants: this.participants,
                 comment: this.comment,
                 })
-            .then(function(docRef) {
-                console.log("Document written with ID: ", docRef.id);
-            })
-            .catch(function(error) {
-                console.error("Error adding document: ", error);
+            // .then(function(docRef) {
+            //     console.log("Document written with ID: ", Ref.id);
+            // })
+            // .catch(function(error) {
+            //     console.error("Error adding document: ", error);
             });
         },
     }
