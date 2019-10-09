@@ -7,6 +7,8 @@ const thisMonth=date.getMonth()+1;
 const weeks=["日","月","火","水","木","金","土"];
 const today=date.getDate();
 
+const db=firebase.firestore();
+
 var year=thisYear;
 var month=thisMonth;
 
@@ -27,6 +29,9 @@ const userData=new Vue({
         },
         getDisplayName(){
             return this.user.displayName;
+        },
+        getUserId(){
+            return this.user.uid;
         }
     }
 });
@@ -68,8 +73,8 @@ const calendar=new Vue({
             this.head=head;
         },
 
-        tdClicked(year,month,day){
-            createTimeSchedule(year,month,day);
+        tdClicked(year,month,day,disabled,schedules){
+            if(year&&month&&day)createTimeSchedule(year,month,day,disabled,schedules);
         },
         
         toNextMonth(){
@@ -109,6 +114,9 @@ function createCalendar(year,month){
 
     var aweek=[];
     var classes=[];
+    var schedules=[];
+
+    var data;
 
     calendar.init();
     calendar.setHead(year+" / "+("00"+month).slice(-2));
@@ -124,19 +132,30 @@ function createCalendar(year,month){
 
         for(var day=0;day<7;day++){
             if(week===0 && day<startDay){
-                aweek.push({daynum:"",date:{year:null,month:null,day:null},class:["weekday"]});
+                aweek.push({daynum:"",schedules:[],date:{year:null,month:null,day:null},disabled:false,class:["weekday"]});
             }else if(daycount>endDayCount){
                 if(day===0) break;
-                else aweek.push({daynum:"",date:null,class:["weekday"]});
+                else aweek.push({daynum:"",schedules:[],date:{year:null,month:null,day:null},disabled:false,class:["weekday"]});
             }else{
                 classes=[];
+                schedules=[];
+                data="";
                 if(year===thisYear&&month===thisMonth&&daycount===today)classes.push("today");
 
                 if(day===0)classes.push("sunday");
                 else if(day===6) classes.push("saturday");
                 else classes.push("weekday");
                 
-                aweek.push({daynum:daycount,date:{year:year,month:month,day:daycount},class:classes});
+                data=("0000"+year).slice(-4)+("00"+month).slice(-2)+("00"+daycount).slice(-2);
+                db.collection("users").doc(userData.getUserId()).collection("schedules").doc(data).collection("data").get().then((snapshot)=>{
+                    var docs=snapshot.docs;
+                    if(docs[0]){
+                        schedules.push(docs);
+                    }
+                });
+
+                if(daycount<today)aweek.push({daynum:daycount,schedules:schedules,date:{year:year,month:month,day:daycount},disabled:false,class:classes});
+                else aweek.push({daynum:daycount,schedules:schedules,date:{year:year,month:month,day:daycount},disabled:true,class:classes});
                 daycount++;
             }
         }
@@ -150,16 +169,18 @@ const timeschedule=new Vue({
         data:{
             head:"",
             date:"",
-            schedules:[],
             found:false,
-            notFoundMessage:"予定が見つかりませんでした。"
+            schedules:[],
+            notFoundMessage:"予定が見つかりませんでした。",
+            canAddEvent:false
         },
         methods:{
             init(){
+                this.schedules=[];
                 this.head="";
                 this.date="";
-                this.schedules=[];
                 this.found=false;
+                this.canAddEvent=false;
             },
             isEmpty(){
                 return this.empty;
@@ -167,8 +188,18 @@ const timeschedule=new Vue({
             setDate(date){
                 this.date=date;
             },
+            setCanAddEvent(canAddEvent){
+                this.canAddEvent=canAddEvent;
+            },
             setHead(head){
                 this.head=head;
+            },
+            setSchedules(schedules){
+                if(schedules){
+                    this.schedules=schedules;
+                    this.found=true;
+                    console.log(this.schedules[0]);
+                }
             },
             toSchedulesForm(){
                 window.location.href="../html/schedules_form.html?date="+this.date;
@@ -176,9 +207,11 @@ const timeschedule=new Vue({
         }
     });
 
-function createTimeSchedule(year,month,day){
+function createTimeSchedule(year,month,day,canAddEvent,schedules){
     timeschedule.init();
+    timeschedule.setCanAddEvent(canAddEvent);
     timeschedule.setDate(("0000"+year).slice(-4)+("00"+month).slice(-2)+("00"+day).slice(-2));
+    timeschedule.setSchedules(schedules);
     timeschedule.setHead(year+" / "+month+" / "+day+" の予定");
 }
 

@@ -45,6 +45,7 @@ button:hover{
 }
 
 #menu li>a{
+    color:lightslategray;
     display:inline-flex;
     text-decoration: none;
     width: 100%;
@@ -140,6 +141,13 @@ button:hover{
 
 .saturday{
     color:blue;
+}
+
+.calendar-schedule{
+    background-color:lightgreen;
+    width:100px;
+    position: absolute;
+    font-size:12px;
 }
 
 /*タイムスケジュール*/

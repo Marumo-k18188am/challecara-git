@@ -41,7 +41,7 @@
                 <div class="menu-item-last">
                     <ul>
                         <li>
-                            <a class="notnowhere">
+                            <a class="notnowhere" href="setting.html">
                                 <img src="../images/setting.png" alt="設定">
                                 <div>設定</div>
                             </a>
@@ -62,7 +62,10 @@
                         <td class="weeks" v-for="week in weeks" v-bind:class="week.class">{{week.weekname}}</td>
                     </tr>
                     <tr v-for="week in td">
-                        <td class="days" v-for="day in week" v-bind:class="day.class" v-on:click="tdClicked(day.date.year,day.date.month,day.date.day)">{{day.daynum}}</td>
+                        <td class="days" v-for="day in week" v-bind:class="day.class" v-on:click="tdClicked(day.date.year, day.date.month, day.date.day, day.disabled, day.schedules)">
+                            {{day.daynum}}
+                            <div class="calendar-schedule" v-bind:hidden="!day.schedules.length">{{day.schedules.length}}件の予定...</div>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -70,7 +73,16 @@
             <div id="timeschedule">
                 <div id="ts-head">{{head}}</div>
                 <div id="ts-notFound" v-bind:hidden="found">{{notFoundMessage}}</div>
-                <button v-on:click="toSchedulesForm">予定を追加</button>
+                <div v-bind:hidden="!found">{{schedules.length}}件の予定:</div>
+                <ul v-for="schedule in schedules">
+                    <li v-for="doc in schedule">
+                        <div>{{doc.data().title}}</div>
+                        <div>{{doc.data().time}}</div>
+                        <div>{{doc.data().participants}}</div>
+                        <div>{{doc.data().comment}}</div>
+                    </li>
+                </ul>
+                <button v-on:click="toSchedulesForm" v-bind:disabled="!canAddEvent">予定を追加</button>
             </div>
         </div>
 
@@ -80,6 +92,7 @@
         <!-- TODO: Add SDKs for Firebase products that you want to use
             https://firebase.google.com/docs/web/setup#config-web-app -->
             <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
 
         <script src="../js/firebase.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

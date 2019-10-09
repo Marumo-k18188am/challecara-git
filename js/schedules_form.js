@@ -23,13 +23,15 @@ const form = new Vue({
 
     methods: {
         addSchedule: function(){
-            db.collection("users").doc(userdata.uid).collection("schedules").doc(this.date).collection(this.time).doc("data").set({
+            db.collection("users").doc(userdata.uid).collection("schedules").doc(this.date).collection("data").doc(this.time).set({
                 title: this.title,
                 time: this.time,
                 place: this.place,
                 participants: this.participants,
                 comment: this.comment,
-            })
+            }).then(()=>{
+                window.location.href="../html/calendar.html"
+            });
             // .then(function(docRef) {
             //     console.log("Document written with ID: ", Ref.id);
             // })
