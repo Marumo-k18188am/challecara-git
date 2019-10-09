@@ -1,0 +1,39 @@
+body{
+    color:lightslategray;
+    border: 1px solid dodgerblue;
+}
+
+button{
+    color: white;
+    background-color: dodgerblue;
+    border: 1px solid dodgerblue;
+    border-radius: 10%;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 30px;
+    float: right;
+}
+
+button:hover{
+    color:lightslategray;
+    background-color:whitesmoke;
+}
+
+input,textarea{
+    color:lightslategray;
+    margin: 5px 5px;
+    padding: 3px;
+    font: 400 20px Arial;
+    box-sizing: content-box;
+    width: 95%;
+}
+
+#form{
+    margin: 15px;
+}
+
+#date{
+    margin: 15px;
+    font-size: 22px;
+}
+
