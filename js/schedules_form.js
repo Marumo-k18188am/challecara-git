@@ -14,7 +14,7 @@ const form = new Vue({
     el: '#form',
     data: {
         date: "",
-        title: "テスト",
+        title: "",
         time: "",
         place: "",
         participants: "",

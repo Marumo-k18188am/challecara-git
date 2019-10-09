@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang = "jp">
+<html lang="jp">
     <head>
         <meta charset = "UTF-8">
         <title>Form</title>
+        <link rel="StyleSheet" href="../css/schedules_form.css">
     </head>
 
     <body>
-        <div id = "form">
-            <div>{{date}}の予定</div>
+        <div id="form">
+            <div id="date">{{ date }}の予定</div>
             <button v-on:click="addSchedule()">追加</button>
+
             <div>
                 <input type="text" v-model="title" placeholder="予定の名前">
             </div>
@@ -20,16 +22,16 @@
             <div>
                 <input v-model = "place" placeholder="場所">
             </div>
+
             <div>
                 <input v-model = "participants" placeholder="参加者">
             </div>
 
             <div>
-                <input v-model = "comment" placeholder="コメント">
+                <textarea v-model = "comment" placeholder="コメント"></textarea>
             </div>
 
         </div>
-
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
 
