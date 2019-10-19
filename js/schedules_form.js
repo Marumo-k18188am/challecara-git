@@ -23,8 +23,9 @@ const form = new Vue({
 
     methods: {
         addSchedule: function(){
-            db.collection("users").doc(userdata.uid).collection("schedules").doc(this.date).collection("data").doc(this.time).set({
+            db.collection("users").doc(userdata.uid).collection("schedules").doc().set({
                 title: this.title,
+                date: this.date,
                 time: this.time,
                 place: this.place,
                 participants: this.participants,
