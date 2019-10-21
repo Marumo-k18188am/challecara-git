@@ -55,6 +55,7 @@ firebase.auth().onAuthStateChanged(function(user){
         userdata.uid = user.uid;
 
         form.setDate(getQueries().date);
+        
     }
 });
 
