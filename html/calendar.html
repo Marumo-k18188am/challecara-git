@@ -74,12 +74,12 @@
                 <div id="ts-head">{{head}}</div>
                 <div id="ts-notFound" v-bind:hidden="found">{{notFoundMessage}}</div>
                 <div v-bind:hidden="!found">{{schedules.length}}件の予定:</div>
-                <ul v-for="schedule in schedules">
-                    <li v-for="doc in schedule">
-                        <div>{{doc.data().title}}</div>
-                        <div>{{doc.data().time}}</div>
-                        <div>{{doc.data().participants}}</div>
-                        <div>{{doc.data().comment}}</div>
+                <ul>
+                    <li v-for="schedule in schedules">
+                        <div>{{schedule.title}}</div>
+                        <div>{{schedule.time}}</div>
+                        <div>{{schedule.participants}}</div>
+                        <div>{{schedule.comment}}</div>
                     </li>
                 </ul>
                 <button v-on:click="toSchedulesForm" v-bind:disabled="!canAddEvent">予定を追加</button>
