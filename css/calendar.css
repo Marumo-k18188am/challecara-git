@@ -130,6 +130,10 @@ button:hover{
     background-color:#beeeff;
 }
 
+.daysSelected{
+    background-color:#beeeff;
+}
+
 .today{
     background-color:palegoldenrod;
     border: 2px solid dodgerblue;

@@ -62,7 +62,7 @@
                         <td class="weeks" v-for="week in weeks" v-bind:class="week.class">{{week.weekname}}</td>
                     </tr>
                     <tr v-for="week in td">
-                        <td class="days" v-for="day in week" v-bind:class="day.class" v-on:click="tdClicked(day.date.year, day.date.month, day.date.day, day.disabled, day.schedules)">
+                        <td class="days" v-for="day in week" v-bind:class="[day.class,{daysSelected:selectedDay===day.date.day}]"v-on:click="tdClicked(day.date.year, day.date.month, day.date.day, day.disabled, day.schedules)">
                             {{day.daynum}}
                             <div class="calendar-schedule" v-bind:hidden="!day.schedules.length">{{day.schedules.length}}件の予定...</div>
                         </td>

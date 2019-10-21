@@ -50,7 +50,8 @@ const calendar=new Vue({
         head:"",
         date:{},
         weeks:[],
-        td:[]
+        td:[],
+        selectedDay:-1
     },
     methods:{
 
@@ -66,6 +67,7 @@ const calendar=new Vue({
             this.head="";
             this.weeks=[];
             this.td=[];
+            this.selectedDay=-1;
         },
 
         setHead(head){
@@ -73,7 +75,10 @@ const calendar=new Vue({
         },
 
         tdClicked(year,month,day,disabled,schedules){
-            if(year&&month&&day)createTimeSchedule(year,month,day,disabled,schedules);
+            if(year&&month&&day){
+                this.selectedDay=day;
+                createTimeSchedule(year,month,day,disabled,schedules);
+            }
         },
         
         toNextMonth(){
@@ -142,7 +147,7 @@ function createCalendar(year,month){
                     else aweek.push({daynum:"",schedules:[],date:{year:null,month:null,day:null},disabled:false,class:["weekday"]});
                 }else{
                     classes=[];
-    
+                    
                     if(day===0)classes.push("sunday");
                     else if(day===6) classes.push("saturday");
                     else classes.push("weekday");
@@ -150,9 +155,11 @@ function createCalendar(year,month){
                     var schedule=[];
                     var dateData=("0000"+year).slice(-4)+("00"+(month)).slice(-2)+("00"+(daycount)).slice(-2);
                     for(var i=0;i<schedules.length;i++){
-                        console.log(schedules[i].title);
-                        if(schedules[i].date===dateData)schedule.push(schedules[i]);
+                        if(schedules[i].date===dateData){
+                            schedule.push(schedules[i]);       
+                        }
                     }
+                    if(year===thisYear&&month===thisMonth&&daycount===today+1&&schedule.length>0)alert("明日は"+schedule.length+"件の用事があります.");
                     if(year===thisYear&&month===thisMonth&&daycount===today){
                         classes.push("today");
                         createTimeSchedule(year,month,daycount,false,schedule);
