@@ -15,21 +15,35 @@ const form = new Vue({
     data: {
         date: "",
         title: "",
-        time: "",
+        startTime: "",
+        endTime: "",
         place: "",
         participants: "",
         comment: "",
+        importance: "0",
+        importanceMark: "×",
     },
 
     methods: {
+        showImportanceMark(){
+            if(this.importance === 0){
+                this.importanceMark = "×";
+            }else if(this.importance === 1){
+                this.importanceMark = "△";
+            }else if(this.importance === 2){
+                this.importanceMark = "〇";
+            }
+        },
         addSchedule: function(){
             db.collection("users").doc(userdata.uid).collection("schedules").doc().set({
                 title: this.title,
                 date: this.date,
-                time: this.time,
+                startTime: this.startTime,
+                endTime: this.endTime,
                 place: this.place,
                 participants: this.participants,
                 comment: this.comment,
+                importance: this.importance,
             }).then(()=>{
                 window.location.href="../html/calendar.html"
             });
