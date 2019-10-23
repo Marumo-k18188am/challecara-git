@@ -183,7 +183,8 @@ const timeschedule=new Vue({
             found:false,
             schedules:[],
             notFoundMessage:"予定が見つかりませんでした。",
-            canAddEvent:false
+            canAddEvent:false,
+            times:[],
         },
         methods:{
             init(){
@@ -192,6 +193,11 @@ const timeschedule=new Vue({
                 this.date="";
                 this.found=false;
                 this.canAddEvent=false;
+
+                this.times=[]
+                for(var i=0;i<24;i++){
+                    this.times.push(i+":00");
+                }
             },
             isEmpty(){
                 return this.empty;
@@ -240,4 +246,4 @@ function getTime(){
   
     var time=year+"/"+month+"/"+day+" "+hh+":"+min+":"+sec;
     return time;
-  }
+}
