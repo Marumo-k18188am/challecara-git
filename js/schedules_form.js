@@ -23,14 +23,13 @@ const form = new Vue({
         importance: "0",
         importanceMark: "×",
     },
-
     methods: {
-        showImportanceMark(){
-            if(this.importance === 0){
+        showImportanceMark: function(){
+            if(this.importance == 0){
                 this.importanceMark = "×";
-            }else if(this.importance === 1){
+            }else if(this.importance == 1){
                 this.importanceMark = "△";
-            }else if(this.importance === 2){
+            }else if(this.importance == 2){
                 this.importanceMark = "〇";
             }
         },
