@@ -80,7 +80,7 @@
                     'margin-top':(schedule.data.startTime.split(':')[0]*34+17)+(34/60*schedule.data.startTime.split(':')[1])+'px'}"
                 >
                     {{schedule.data.title}}
-                    <a v-bind:href="'../html/schedules_form.html?mode=edit&id='+schedule.id">編集</a>
+                    <a v-bind:href="../html/schedules_form.html>編集</a>
                 </div>
                 <table v-bind:hidden="!found">
                     <tr v-for="time in times">
