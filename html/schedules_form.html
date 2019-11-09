@@ -10,42 +10,27 @@
         <div id="form">
             <div id="date">{{ date }}の予定</div>
             <button v-on:click="addSchedule()">追加</button>
+            
+            <p>タイトル</p>
+            <input type="text" v-model="title">
 
-            <div>
-                タイトル
-                <input type="text" v-model="title">
-            </div>
+            <p>開始時刻</p>
+            <input type="time" v-model="startTime">
 
-            <div>
-                開始時刻
-                <input type="time" v-model = "startTime">
-            </div>
+            <p>終了時刻</p>
+            <input type="time" v-model="endTime">
 
-            <div>
-                終了時刻
-                <input type="time" v-model = "endTime">
-            </div>
+            <p>場所</p>
+            <input v-model="place">
 
-            <div>
-                場所
-                <input v-model="place">
-            </div>
+            <p>参加者</p>
+            <input v-model="participants">
 
-            <div>
-                参加者
-                <input v-model="participants">
-            </div>
+            <p>コメント</p>
+            <textarea v-model="comment"></textarea>
 
-            <div>
-                コメント
-                <textarea v-model="comment"></textarea>
-            </div>
-
-            <div>
-                重要度
-                <input type="range" v-on:click="showImportanceMark()" v-model="importance" value="0" min="0" max="2">{{importanceMark}}
-            </div>
-
+            <div>重要度 {{importanceMark}}</div>
+            <input type="range" id="importanceSlider" v-on:click="showImportanceMark()" v-model="importance" value="0" min="0" max="2">
         </div>
 
         <!-- The core Firebase JS SDK is always required and must be listed first -->

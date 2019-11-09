@@ -15,8 +15,8 @@ const form = new Vue({
     data: {
         date: "",
         title: "",
-        startTime: "",
-        endTime: "",
+        startTime: "00:00",
+        endTime: "00:00",
         place: "",
         participants: "",
         comment: "",
@@ -26,11 +26,11 @@ const form = new Vue({
     methods: {
         showImportanceMark: function(){
             if(this.importance == 0){
-                this.importanceMark = "×";
-            }else if(this.importance == 1){
                 this.importanceMark = "△";
-            }else if(this.importance == 2){
+            }else if(this.importance == 1){
                 this.importanceMark = "〇";
+            }else if(this.importance == 2){
+                this.importanceMark = "◎";
             }
         },
         addSchedule: function(){
