@@ -201,3 +201,8 @@ button:hover{
     border-radius:5%;
     background-color: lightgreen;
 }
+
+.ts-schedules a{
+    float:right;
+    color:lightslategray;
+}

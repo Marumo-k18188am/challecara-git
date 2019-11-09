@@ -127,7 +127,7 @@ function createCalendar(year,month){
     db.collection("users").doc(userData.getUserId()).collection("schedules").get().then(function(querySnapshot) {
         var docs=querySnapshot.docs;
         docs.forEach((doc)=>{
-            schedules.push(doc.data());
+            schedules.push({id:doc.id,data:doc.data()});
         });
 
         for(var i=0;i<weeks.length;i++){
@@ -154,8 +154,9 @@ function createCalendar(year,month){
                     
                     var schedule=[];
                     var dateData=("0000"+year).slice(-4)+("00"+(month)).slice(-2)+("00"+(daycount)).slice(-2);
+                    console.log(schedules)
                     for(var i=0;i<schedules.length;i++){
-                        if(schedules[i].date===dateData){
+                        if(schedules[i].data.date===dateData){
                             schedule.push(schedules[i]);       
                         }
                     }
@@ -220,7 +221,7 @@ const timeschedule=new Vue({
                 }
             },
             toSchedulesForm(){
-                window.location.href="../html/schedules_form.html?date="+this.date;
+                window.location.href="../html/schedules_form.html?mode=add&date="+this.date;
             }
         }
     });
