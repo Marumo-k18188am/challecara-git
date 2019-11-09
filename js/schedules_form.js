@@ -65,7 +65,7 @@ const form = new Vue({
         setDate(date){
             this.date=date;
         },
-        setMode(){
+        setMode(mode){
             this.mode=mode;
         }
     }
