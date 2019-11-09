@@ -12,33 +12,9 @@ const db=firebase.firestore();
 var year=thisYear;
 var month=thisMonth;
 
-//ページ描画&ユーザーデータ取得
-const userData=new Vue({
-    el:".userData",
-    data:{
-        user:{},
-        hidden:true
-    },
-    methods:{
-        initUserData(user){
-            this.user=user;
-            this.hidden=false;
-        },
-        getPhotoURL(){
-            return this.user.photoURL;
-        },
-        getDisplayName(){
-            return this.user.displayName;
-        },
-        getUserId(){
-            return this.user.uid;
-        }
-    }
-});
-
+//ページ描画
 firebase.auth().onAuthStateChanged(function(user){
     if(user){
-        userData.initUserData(user);
         createCalendar(year,month);
     }
 });

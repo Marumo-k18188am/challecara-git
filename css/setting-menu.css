@@ -1,0 +1,31 @@
+body{
+    color:lightslategray;
+    font-size:24px;
+}
+
+/*メイン*/
+#main{
+    float:left;
+    margin-left:5px;
+}
+
+#main-title{
+    font-size: 36px;
+}
+
+#main-menu{
+    width: 300px;
+    padding-left: 0;
+}
+
+#main-menu li{
+    user-select: none;
+    list-style: none;
+    padding: 5px 0;
+    border-top:1px solid lightgray;
+    border-bottom:1px solid lightgray;
+}
+
+#main-menu li:hover{
+    border:1px solid dodgerblue;
+}

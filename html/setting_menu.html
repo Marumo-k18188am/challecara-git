@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="StyleSheet" href="../css/menubar.css">
+        <link rel="StyleSheet" href="../css/setting-menu.css">
+    </head>
+
+    <body>
+        <div id="menu" class="userData">
+            <div id="menu-profile" class="menu-item" v-bind:hidden="hidden">
+                <img id="menu-icon" v-bind:src="getPhotoURL()" alt="アイコン">
+                <div id="menu-username">{{getDisplayName()}}</div>
+            </div>
+
+            <div class="menu-item">
+                <ul>
+                    <li>
+                        <a class="notnowhere" href="calendar.html">
+                            <img src="../images/home_2.png" alt="ホーム">
+                            <div>ホーム</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="notnowhere">
+                            <img src="../images/notification.png" alt="イベント通知">
+                            <div>イベント通知</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="notnowhere">
+                            <img src="../images/community.png" alt="コミュニティー">
+                            <div>コミュニティー</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-item-last">
+                <ul>
+                    <li>
+                        <a class="nowhere">
+                            <img src="../images/setting.png" alt="設定">
+                            <div>設定</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="main">
+            <div id="main-title">設定</div>
+            <ul id="main-menu">
+                <li v-on:click="logout()">
+                    ログアウト
+                </li>
+            </ul>
+        </div>
+        
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#config-web-app -->
+            <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+
+        <script src="../js/firebase.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="../js/userdata.js"></script>
+        <script src="../js/setting-menu.js"></script>
+    </body>
+</html>
