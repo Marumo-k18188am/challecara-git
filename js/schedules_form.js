@@ -22,8 +22,17 @@ const form = new Vue({
         comment: "",
         importance: "0",
         importanceMark: "×",
+        mode: "add",
+        buttonMessage: "追加",
     },
     methods: {
+        showMode: function(){
+            if(this.mode === "add"){
+                this.button = "追加";
+            }else if(this.mode === "edit"){
+                this.button = "修正";
+            }
+        },
         showImportanceMark: function(){
             if(this.importance == 0){
                 this.importanceMark = "△";
@@ -55,10 +64,12 @@ const form = new Vue({
         },
         setDate(date){
             this.date=date;
+        },
+        setMode(){
+            this.mode=mode;
         }
     }
 })
-
 
 firebase.auth().onAuthStateChanged(function(user){
     if(user){
@@ -69,6 +80,7 @@ firebase.auth().onAuthStateChanged(function(user){
         userdata.uid = user.uid;
 
         form.setDate(getQueries().date);
+        form.setMode(getQueries().mode);
     }
 });
 
