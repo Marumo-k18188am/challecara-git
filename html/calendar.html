@@ -74,8 +74,11 @@
                 <div id="ts-head">{{head}}</div>
                 <div id="ts-notFound" v-bind:hidden="found">{{notFoundMessage}}</div>
                 <div v-bind:hidden="!found">{{schedules.length}}件の予定</div>
-                <div class="ts-schedules" v-for="schedule in schedules"v-bind:style="{'margin-top':(schedule.startTime.split(':')[0]*34+17)+(34/60*schedule.startTime.split(':')[1])+'px'}">
-                    {{schedule.title}}
+                <div class="ts-schedules" v-for="schedule in schedules" v-bind:style="{
+                    'margin-top':(schedule.data.startTime.split(':')[0]*34+17)+(34/60*schedule.data.startTime.split(':')[1])+'px'}"
+                >
+                    {{schedule.data.title}}
+                    <a v-bind:href="'../html/schedules_form.html?mode=edit&id='+schedule.id">編集</a>
                 </div>
                 <table v-bind:hidden="!found">
                     <tr v-for="time in times">
