@@ -130,7 +130,6 @@ function createCalendar(year,month){
                     
                     var schedule=[];
                     var dateData=("0000"+year).slice(-4)+("00"+(month)).slice(-2)+("00"+(daycount)).slice(-2);
-                    console.log(schedules)
                     for(var i=0;i<schedules.length;i++){
                         if(schedules[i].data.date===dateData){
                             schedule.push(schedules[i]);       
