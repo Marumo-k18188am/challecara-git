@@ -135,7 +135,17 @@ function createCalendar(year,month){
                             schedule.push(schedules[i]);       
                         }
                     }
-                    if(year===thisYear&&month===thisMonth&&daycount===today+1&&schedule.length>0)alert("明日は"+schedule.length+"件の用事があります.");
+                    if(year===thisYear&&month===thisMonth&&daycount===today+1&&schedule.length>0){
+                        Notification.requestPermission(function(result) {
+                            if (result === 'denied') {
+                                alert("明日は"+schedule.length+"件の用事があります.");
+                            } else if (result === 'default') {
+                                alert("明日は"+schedule.length+"件の用事があります.");
+                            } else if (result === 'granted') {
+                               var n=new Notification("明日は"+schedule.length+"件の用事があります.");
+                            }
+                          });
+                    }
                     if(year===thisYear&&month===thisMonth&&daycount===today){
                         classes.push("today");
                         createTimeSchedule(year,month,daycount,false,schedule);

@@ -4,6 +4,7 @@
     <head>
         <meta charset="utf-8">
         <title></title>
+        <link rel="icon" href="../images/favicon.ico">
         <link rel="StyleSheet" href="../css/menubar.css">
         <link rel="StyleSheet" href="../css/setting-menu.css">
     </head>
@@ -53,6 +54,9 @@
         <div id="main">
             <div id="main-title">設定</div>
             <ul id="main-menu">
+                <li v-on:click="toSetProfile()">
+                    プロフィール設定
+                </li>
                 <li v-on:click="logout()">
                     ログアウト
                 </li>

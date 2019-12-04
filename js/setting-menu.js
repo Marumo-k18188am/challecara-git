@@ -6,6 +6,10 @@ const setmenu=new Vue({
 
     },
     methods:{
+        toSetProfile(){
+            window.location.href="../html/setting_profile.html";
+        },
+
         logout(){
             var result=window.confirm("本当にログアウトしますか?");
             if(result){
