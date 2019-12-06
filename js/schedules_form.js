@@ -13,6 +13,8 @@ var userdata={
 const form = new Vue({
     el: '#form',
     data: {
+        mode: "add",
+        id: "",
         date: "",
         title: "",
         startTime: "00:00",
@@ -22,27 +24,18 @@ const form = new Vue({
         comment: "",
         importance: "0",
         importanceMark: "×",
-        mode: "add",
-        buttonMessage: "追加",
     },
     methods: {
-        showMode: function(){
-            if(this.mode === "add"){
-                this.button = "追加";
-            }else if(this.mode === "edit"){
-                this.button = "修正";
-            }
-        },
-        showImportanceMark: function(){
+        showImportanceMark(){
             if(this.importance == 0){
                 this.importanceMark = "△";
             }else if(this.importance == 1){
-                this.importanceMark = "〇";
+                this.importanceMark = "◯";
             }else if(this.importance == 2){
                 this.importanceMark = "◎";
             }
         },
-        addSchedule: function(){
+        addSchedule(){
             db.collection("users").doc(userdata.uid).collection("schedules").doc().set({
                 title: this.title,
                 date: this.date,
@@ -55,19 +48,35 @@ const form = new Vue({
             }).then(()=>{
                 window.location.href="../html/calendar.html"
             });
-            // .then(function(docRef) {
-            //     console.log("Document written with ID: ", Ref.id);
-            // })
-            // .catch(function(error) {
-            //     console.error("Error adding document: ", error);
-            //});
+        },
+        editSchedule(){
+            this.mode="add";
         },
         setDate(date){
             this.date=date;
         },
         setMode(mode){
             this.mode=mode;
-        }
+            if(this.mode == "add"){
+                this.date = getQueries().date;
+            }
+            else if(this.mode == "edit"){
+                db.collection("users").doc(userdata.uid).collection("schedules").doc(getQueries().id).get().then(
+                    function(doc){
+                        console.log(doc.data());
+                        form.date=doc.data().date;
+                        form.title=doc.data().title;
+                        form.startTime=doc.data().startTime;
+                        form.endTime=doc.data().endTime;
+                        form.place=doc.data().place;
+                        form.participants=doc.data().participants;
+                        form.comment=doc.data().comment;
+                        form.importance=doc.data().importance;
+                        form.showImportanceMark;
+                    }
+                )
+            }
+        },
     }
 })
 
@@ -79,7 +88,6 @@ firebase.auth().onAuthStateChanged(function(user){
         userdata.emailVerified = user.emailVerified;
         userdata.uid = user.uid;
 
-        form.setDate(getQueries().date);
         form.setMode(getQueries().mode);
     }
 });

@@ -10,41 +10,42 @@
     <body>
         <div id="form">
             <div id="date">{{ date }}の予定</div>
-            <button v-on:click="addSchedule()">{{ buttonMessage }}</button>
+            <button v-on:click="addSchedule()" v-if="mode == 'add'">追加</button>
+            <button v-on:click="editSchedule()" v-else>修正</button>
             
             <div>
                 <div>タイトル</div>
-                <input type="text" v-model="title">
+                <input type="text" v-model="title" v-bind:disabled="mode == 'edit'">
             </div>
 
             <div>
                 <div>開始時刻</div>
-                <input type="time" v-model="startTime">
+                <input type="time" v-model="startTime" v-bind:disabled="mode == 'edit'">
             </div>
 
             <div>
                 <div>終了時刻</div>
-                <input type="time" v-model="endTime">
+                <input type="time" v-model="endTime" v-bind:disabled="mode == 'edit'">
             </div>
 
             <div>
                 <div>場所</div>
-                <input v-model="place">
+                <input v-model="place" v-bind:disabled="mode == 'edit'">
             </div>
 
             <div>
                 <div>参加者</div>
-                <input v-model="participants">
+                <input v-model="participants" v-bind:disabled="mode == 'edit'">
             </div>
 
             <div>
                 <div>コメント</div>
-                <textarea v-model="comment"></textarea>
+                <textarea v-model="comment" v-bind:disabled="mode == 'edit'"></textarea>
             </div>
 
             <div>
                 <div>重要度 {{importanceMark}}</div>
-                <input type="range" id="importanceSlider" v-on:click="showImportanceMark()" v-model="importance" value="0" min="0" max="2">
+                <input type="range" id="importanceSlider" v-bind:disabled="mode == 'edit'" v-on:click="showImportanceMark()" v-model="importance" value="0" min="0" max="2">
             </div>
         </div>
 
