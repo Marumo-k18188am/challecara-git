@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="jp">
+    <head>
+        <meta charset = "UTF-8">
+        <title>Form</title>
+        <link rel="icon" href="../images/favicon.ico">
+        <link rel="StyleSheet" href="../css/schedules_form_corp.css">
+    </head>
+
+    <body>
+        <div id="form">
+            <div id="date">{{ date }}の予定</div>
+            <button v-on:click="addSchedule()" v-if="mode == 'add'">追加</button>
+            <button v-on:click="editSchedule()" v-else>修正</button>
+            
+            <div>
+                <div>タイトル</div>
+                <input type="text" v-model="title" v-bind:disabled="mode == 'edit'">
+            </div>
+
+            <div>
+                <div>開始時刻</div>
+                <input type="time" v-model="startTime" v-bind:disabled="mode == 'edit'">
+            </div>
+
+            <div>
+                <div>終了時刻</div>
+                <input type="time" v-model="endTime" v-bind:disabled="mode == 'edit'">
+            </div>
+
+            <div>
+                <div>場所</div>
+                <input v-model="place" v-bind:disabled="mode == 'edit'">
+            </div>
+
+            <div>
+                <div>定員</div>
+                <input v-model="participants" v-bind:disabled="mode == 'edit'">
+            </div>
+
+            <div>
+                <div>コメント</div>
+                <textarea v-model="comment" v-bind:disabled="mode == 'edit'"></textarea>
+            </div>
+        </div>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#config-web-app -->
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+
+        <script src="../js/firebase.js"></script>
+        <script src = "../js/vue.js"></script>
+        <script src = "../js/schedules_form_corp.js"></script>
+    </body>
+</html>
