@@ -9,6 +9,18 @@
     width:90%;
 }
 
+.menu-alert{
+    position: absolute;
+    left:3%;
+    width: 30px;
+    height:30px;
+    line-height:30px;
+    text-align: center;
+    color:whitesmoke;
+    background-color: red;
+    border-radius:50%;
+}
+
 #menu{
     float: left;
     width:20%;
@@ -57,6 +69,7 @@
 }
 
 #menu-profile{
+    position:relative;
     margin:1px auto 5px;
     padding-bottom:60px;
 }
@@ -71,4 +84,15 @@
 
 #menu-username{
     font-size: 28px;
+}
+
+#menu-despriction{
+    margin-top:30px;
+}
+
+#menu-button{
+    position:absolute;
+    bottom:0;
+    right:0;
+    margin-bottom:5px;
 }
