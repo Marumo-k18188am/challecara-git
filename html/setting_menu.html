@@ -15,6 +15,7 @@
                 <img id="menu-icon" v-bind:src="getPhotoURL()" alt="アイコン">
                 <div id="menu-username">{{getDisplayName()}}</div>
                 <div id="menu-despriction">{{getModeText()}}のユーザー</div>
+                <button id="menu-button" v-on:click="toSetProfile()">プロフィール設定</button>
             </div>
 
             <div class="menu-item">

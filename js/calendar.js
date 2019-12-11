@@ -135,16 +135,16 @@ function createCalendar(year,month){
                         }
                     }
                     if(year===thisYear&&month===thisMonth&&daycount===today+1&&schedule.length>0){
-                        var count=schedule.length;
-                        Notification.requestPermission(function(result) {
-                            if (result === 'denied') {
-                                alert("明日は"+count+"件の用事があります.");
-                            } else if (result === 'default') {
-                                alert("明日は"+count+"件の用事があります.");
-                            } else if (result === 'granted') {
-                               var n=new Notification("明日は"+count+"件の用事があります.");
-                            }
-                          });
+                    var count=schedule.length;
+                    Notification.requestPermission(function(result) {
+                        if (result === 'denied') {
+                            alert("明日は"+count+"件の用事があります.");
+                        } else if (result === 'default') {
+                            alert("明日は"+count+"件の用事があります.");
+                        } else if (result === 'granted') {
+                            var n=new Notification("明日は"+count+"件の用事があります.");
+                        }
+                        });
                     }
                     if(year===thisYear&&month===thisMonth&&daycount===today){
                         classes.push("today");
