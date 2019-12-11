@@ -15,8 +15,8 @@ const form = new Vue({
     data: {
         mode: "add",
         id: "",
-        title: "",
         date: "",
+        title: "",
         startTime: "",
         endTime: "",
         place: "",
@@ -42,9 +42,8 @@ const form = new Vue({
         },
         editSchedule(){
             db.collection("users").doc(userdata.uid).collection("schedules").doc(this.id).set({
-                id: this.id,
                 title: this.title,
-                date: this.date.substr(0,4) + this.date.substr(5,2) + this.date.substr(8,2),
+                date: this.date,
                 startTime: this.startTime,
                 endTime: this.endTime,
                 place: this.place,
@@ -55,6 +54,28 @@ const form = new Vue({
                 window.location.href="../html/calendar.html"
             });
         },
+        setMode(mode){
+            this.mode=mode;
+            if(this.mode == "add"){
+                this.setDate();
+            }
+            else if(this.mode == "edit"){
+                db.collection("users").doc(userdata.uid).collection("schedules").doc(getQueries().id).get().then(
+                    function(doc){
+                        form.id=doc.data().id;
+                        form.date=doc.data().date;
+                        form.title=doc.data().title;
+                        form.startTime=doc.data().startTime;
+                        form.endTime=doc.data().endTime;
+                        form.place=doc.data().place;
+                        form.participants=doc.data().participants;
+                        form.comment=doc.data().comment;
+                        form.importance=doc.data().importance;
+                        showImportanceMark();
+                    }
+                )
+            }
+        },
         showImportanceMark(){
             if(this.importance == 0){
                 this.importanceMark = "△";
@@ -64,30 +85,9 @@ const form = new Vue({
                 this.importanceMark = "◎";
             }
         },
-        setDate(a){
+        setDate(){
+            var a = getQueries().date;
             this.date = a.substr(0,4) + "/" + a.substr(4,2) + "/" + a.substr(6,2);
-        },
-        setMode(mode){
-            this.mode=mode;
-            if(this.mode == "add"){
-                this.setDate(getQueries().date);
-            }
-            else if(this.mode == "edit"){
-                db.collection("users").doc(userdata.uid).collection("schedules").doc(getQueries().id).get().then(
-                    function(doc){
-                        form.id=getQueries().id;
-                        form.setDate(doc.data().date);
-                        form.title=doc.data().title;
-                        form.startTime=doc.data().startTime;
-                        form.endTime=doc.data().endTime;
-                        form.place=doc.data().place;
-                        form.participants=doc.data().participants;
-                        form.comment=doc.data().comment;
-                        form.importance=doc.data().importance;
-                        form.showImportanceMark();
-                    }
-                )
-            }
         },
     }
 })
