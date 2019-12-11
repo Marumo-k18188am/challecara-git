@@ -9,12 +9,14 @@
         <link rel="StyleSheet" href="../css/menubar.css">
     </head>
 
-    <body>
+    <body class="whiteTheme">
         <div id="main">
             <div id="menu" class="userData">
                 <div id="menu-profile" class="menu-item" v-bind:hidden="hidden">
                     <img id="menu-icon" v-bind:src="getPhotoURL()" alt="アイコン">
                     <div id="menu-username">{{getDisplayName()}}</div>
+                    <div id="menu-despriction">{{getModeText()}}のユーザー</div>
+                    <button id="menu-button" v-on:click="toSetProfile()">プロフィール設定</button>
                 </div>
 
                 <div class="menu-item">
@@ -77,7 +79,8 @@
                 <div id="ts-notFound" v-bind:hidden="found">{{notFoundMessage}}</div>
                 <div v-bind:hidden="!found">{{schedules.length}}件の予定</div>
                 <div class="ts-schedules" v-for="schedule in schedules" v-bind:style="{
-                    'margin-top':(schedule.data.startTime.split(':')[0]*34+17)+(34/60*schedule.data.startTime.split(':')[1])+'px'}"
+                    'margin-top':(schedule.data.startTime.split(':')[0]*34+17)+'px',
+                    'height':Math.max(30,(schedule.data.endTime.split(':')[0]-schedule.data.startTime.split(':')[0])*34)+'px'}"
                 >
                     {{schedule.data.title}}
                     <a v-bind:href="'../html/schedules_form.html?mode=edit&id='+schedule.id">編集</a>
