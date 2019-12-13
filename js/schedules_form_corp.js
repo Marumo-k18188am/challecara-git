@@ -20,10 +20,8 @@ const form = new Vue({
         startTime: "",
         endTime: "",
         place: "",
-        participants: "",
+        capacity: "",
         comment: "",
-        importance: "1",
-        importanceMark: "◯",
     },
     methods: {
         addSchedule(){
@@ -33,9 +31,8 @@ const form = new Vue({
                 startTime: this.startTime,
                 endTime: this.endTime,
                 place: this.place,
-                participants: this.participants,
+                capacity: this.capacity,
                 comment: this.comment,
-                importance: this.importance,
             }).then(()=>{
                 window.location.href="../html/calendar.html"
             });
@@ -47,9 +44,8 @@ const form = new Vue({
                 startTime: this.startTime,
                 endTime: this.endTime,
                 place: this.place,
-                participants: this.participants,
+                capacity: this.capacity,
                 comment: this.comment,
-                importance: this.importance,
             }).then(()=>{
                 window.location.href="../html/calendar.html"
             });
@@ -68,21 +64,10 @@ const form = new Vue({
                         form.startTime=doc.data().startTime;
                         form.endTime=doc.data().endTime;
                         form.place=doc.data().place;
-                        form.participants=doc.data().participants;
+                        form.capacity=doc.data().capacity;
                         form.comment=doc.data().comment;
-                        form.importance=doc.data().importance;
-                        showImportanceMark();
                     }
                 )
-            }
-        },
-        showImportanceMark(){
-            if(this.importance == 0){
-                this.importanceMark = "△";
-            }else if(this.importance == 1){
-                this.importanceMark = "◯";
-            }else if(this.importance == 2){
-                this.importanceMark = "◎";
             }
         },
         setDate(){

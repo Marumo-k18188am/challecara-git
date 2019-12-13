@@ -55,6 +55,9 @@ const form = new Vue({
                 window.location.href="../html/calendar.html"
             });
         },
+        chaengeMode(){
+            this.mode = "edit";
+        },
         showImportanceMark(){
             if(this.importance == 0){
                 this.importanceMark = "△";
@@ -72,7 +75,7 @@ const form = new Vue({
             if(this.mode == "add"){
                 this.setDate(getQueries().date);
             }
-            else if(this.mode == "edit"){
+            else if(this.mode == "view"){
                 db.collection("users").doc(userdata.uid).collection("schedules").doc(getQueries().id).get().then(
                     function(doc){
                         form.id=getQueries().id;
