@@ -6,6 +6,7 @@
         <title></title>
         <link rel="icon" href="../images/favicon.ico">
         <link rel="StyleSheet" href="../css/setting_profile.css">
+        <link rel="styleSheet" href="../css/hobbyChooser.css">
     </head>
 
     <body>
@@ -33,17 +34,36 @@
                 </select>
                 <br>
                 <div>好きなモノリスト</div>
-                <input type="text">
-                <button>検索</button>
-                <ul id="list">
-                    <li>音楽・映像</li>
-                    <li>スポーツ</li>
-                    <li>アニメ・ゲーム</li>
-                    <li>行楽</li>
-                    <li>料理</li>
-                    <li>手芸</li>
-                    <li>+新しい項目を追加</li>
-                </ul>
+                
+                <div id="hobbyChooser">
+                    <input type="text">
+                    <button>検索</button>
+                    <table>
+                        <tr>
+                            <td id="hobbyChooser-art">音楽・芸術</td>
+                            <td id="hobbyChooser-sport">スポーツ</td>
+                        </tr>
+                        <tr>
+                            <td id="hobbyChooser-subc">アニメ・ゲーム</td>
+                            <td id="hobbyChooser-leisure">行楽・レジャー</td>
+                        </tr>
+                        <tr>
+                            <td id="hobbyChooser-cook">料理</td>
+                            <td id="hobbyChooser-handyc">ものづくり</td>
+                        </tr>
+                        <tr>
+                            <td id="hobbyChooser-else">その他</td>
+                        </tr>
+                    </table>
+        
+                    <div hidden>
+                        <ul>
+                            <li>loaded tags are here</li>   
+                        </ul>
+                        <div id="hobbyChooser-newContent">+新しいコンテンツを追加...</li>
+                    </div>
+                    
+                </div>
                 
             </div>
             <img src="../images/icon.jpg">
@@ -62,6 +82,7 @@
 
         <script src="../js/firebase.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
         <script src="../js/setting_profile.js"></script>
         
     </body>

@@ -1,0 +1,70 @@
+#hobbyChooser{
+    color:lightslategray;
+    font-size:28px;
+    text-align: center;
+    position: absolute;
+    border:1px solid dodgerblue;
+    height:400px;
+}
+
+#hobbyChooser input{
+    margin-bottom:30px;
+    font-size: 28px;
+    color:lightslategray;
+    border: none;
+    border-bottom: 1px solid lightgray;
+}
+
+#hobbyChooser table{
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+#hobbyChooser td{
+    padding:15px;
+    user-select: none;
+}
+
+#hobbyChooser-art{
+    border:1px solid lightgray;
+}
+
+#hobbyChooser-sport{
+    border:1px solid lightgray;
+}
+
+#hobbyChooser-subc{
+    border:1px solid lightgray;
+}
+
+#hobbyChooser-leisure{
+    border:1px solid lightgray;
+}
+
+#hobbyChooser-cook{
+    border:1px solid lightgray;
+}
+
+#hobbyChooser-handyc{
+    border:1px solid lightgray;
+}
+
+#hobbyChooser-else{
+    border:1px solid lightgray;
+}
+
+#hobbyChooser ul{
+    margin:5px;
+    padding-inline-start: 0;
+}
+
+#hobbyChooser li{
+    list-style: none;
+    padding-left:0;
+}
+
+#hobbyChooser-newContent{
+    user-select:none;
+    margin:5px;
+    border-top:1px solid lightgray;
+}
