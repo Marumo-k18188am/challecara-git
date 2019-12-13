@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="icon" href="../images/favicon.ico">
+        <link rel="StyleSheet" href="../css/setting_profile.css">
+    </head>
+
+    <body>
+        <div id="main">
+            <button v-on:click="back()">戻る</button>
+            <br>
+            <div id="title">プロフィール設定</div>
+
+            <!--
+                <div class="block">
+                <div>Google アカウント</div>
+                <div class="userData">
+                    <img id="icon" v-bind:src="getPhotoURL()" alt="アイコン">
+                    <div id="username">{{getDisplayName()}}</div>
+                </div>
+                <button v-on:click="switchAcc()">アカウントを切り替える</button>
+            </div>
+            -->
+            
+            <div class="block">
+                <div>ユーザー情報 (変更すると予定がすべて消去されます!)</div>
+                <select v-model="mode" v-on:change="switchMode()">
+                    <option value=0>個人</option>
+                    <option value=1>法人</option>
+                </select>
+                <br>
+                <div>好きなモノリスト</div>
+                <input type="text">
+                <button>検索</button>
+                <ul id="list">
+                    <li>音楽・映像</li>
+                    <li>スポーツ</li>
+                    <li>アニメ・ゲーム</li>
+                    <li>行楽</li>
+                    <li>料理</li>
+                    <li>手芸</li>
+                    <li>+新しい項目を追加</li>
+                </ul>
+                
+            </div>
+            <img src="../images/icon.jpg">
+        </div>
+        
+        
+        
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#config-web-app -->
+            <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+
+        <script src="../js/firebase.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="../js/setting_profile.js"></script>
+        
+    </body>
+</html>

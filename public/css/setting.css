@@ -1,0 +1,26 @@
+body{
+    color:lightslategray;
+}
+
+#set-title{
+    font-size: 36px;
+}
+
+#set-main{
+    width: 300px;
+    padding-left: 0;
+}
+
+#set-main li{
+    user-select: none;
+    padding-top:5px;
+    padding-bottom:5px;
+    
+    list-style: none;
+    border-top:1px solid lightgray;
+    border-bottom:1px solid lightgray;
+}
+
+#set-main li:hover{
+    border:1px solid dodgerblue;
+}
