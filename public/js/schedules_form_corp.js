@@ -50,16 +50,22 @@ const form = new Vue({
                 window.location.href="../html/calendar.html"
             });
         },
+        chengeMode() {
+            this.mode = "edit";
+        },
+        setDate(a) {
+            this.date = a.substr(0,4) + "/" + a.substr(4,2) + "/" + a.substr(6,2);
+        },
         setMode(mode){
             this.mode=mode;
             if(this.mode == "add"){
-                this.setDate();
+                this.setDate(getQueries().date);
             }
             else if(this.mode == "edit"){
                 db.collection("users").doc(userdata.uid).collection("schedules").doc(getQueries().id).get().then(
                     function(doc){
-                        form.id=doc.data().id;
-                        form.date=doc.data().date;
+                        form.id=getQUeries().id;
+                        form.setDate(doc.data().date);
                         form.title=doc.data().title;
                         form.startTime=doc.data().startTime;
                         form.endTime=doc.data().endTime;
@@ -69,10 +75,6 @@ const form = new Vue({
                     }
                 )
             }
-        },
-        setDate(){
-            var a = getQueries().date;
-            this.date = a.substr(0,4) + "/" + a.substr(4,2) + "/" + a.substr(6,2);
         },
     }
 })
