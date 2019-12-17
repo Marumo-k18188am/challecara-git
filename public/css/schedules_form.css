@@ -63,3 +63,15 @@ textarea{
     padding: 5px;
     width: 30%;
 }
+
+#backButton{
+    margin: 0;
+    color: dodgerblue;
+    background-color: white;
+    border: 1px solid dodgerblue;
+    border-radius: 10%;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 30px;
+    text-align: right;
+}

@@ -13,6 +13,7 @@
             <button v-on:click="addSchedule()" v-if="mode == 'add'">追加</button>
             <button v-on:click="chaengeMode()" v-else-if="mode == 'view'">内容を修正する</button>
             <button v-on:click="editSchedule()" v-else>修正</button>
+            <button id="backButton" v-on:click="">戻る</button>
 
             <div>
                 <div>タイトル</div>
