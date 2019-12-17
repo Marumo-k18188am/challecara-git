@@ -67,6 +67,10 @@ const form = new Vue({
                 this.importanceMark = "◎";
             }
         },
+        back(){
+            console.log("**関数の中にいる**");
+            //history.back();
+        },
         setDate(a){
             this.date = a.substr(0,4) + "/" + a.substr(4,2) + "/" + a.substr(6,2);
         },

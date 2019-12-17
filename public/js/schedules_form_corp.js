@@ -53,6 +53,9 @@ const form = new Vue({
         chengeMode() {
             this.mode = "edit";
         },
+        back() {
+            console.log("**関数の中にいる**");
+        },
         setDate(a) {
             this.date = a.substr(0,4) + "/" + a.substr(4,2) + "/" + a.substr(6,2);
         },
