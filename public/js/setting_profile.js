@@ -1,6 +1,6 @@
 "use strict";
 
-var db = firebase.firestore();
+
 
 const main=new Vue({
     el:"#main",
@@ -54,6 +54,9 @@ const main=new Vue({
         },
         setMode(mode){
             this.mode=mode;
+        },
+        showHobbyChooser(){
+            hobbyChooser.showHobbyChooser();
         }
     }
 });

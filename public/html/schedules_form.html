@@ -10,10 +10,12 @@
     <body>
         <div id="form">
             <div id="date">{{ date }}の予定</div>
-            <button v-on:click="addSchedule()" v-if="mode == 'add'">追加</button>
-            <button v-on:click="chaengeMode()" v-else-if="mode == 'view'">内容を修正する</button>
-            <button v-on:click="editSchedule()" v-else>修正</button>
-            <button v-on:click="back()" id="backButton">戻る</button>
+            <div id = "buttonArea">
+                <button v-on:click="addSchedule()" v-if="mode == 'add'">追加</button>
+                <button v-on:click="chaengeMode()" v-else-if="mode == 'view'">内容を修正する</button>
+                <button v-on:click="editSchedule()" v-else>修正</button>
+                <button v-on:click="back()" id="backButton">戻る</button>
+            </div>
 
             <div>
                 <div>タイトル</div>
@@ -49,6 +51,7 @@
                 <div>重要度 {{importanceMark}}</div>
                 <input type="range" id="importanceSlider"  value="0" min="0" max="2" v-bind:disabled="mode == 'view'" v-on:click="showImportanceMark()" v-model="importance">
             </div>
+
         </div>
 
         <!-- The core Firebase JS SDK is always required and must be listed first -->

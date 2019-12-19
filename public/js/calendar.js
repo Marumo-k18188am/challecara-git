@@ -131,6 +131,13 @@ function createCalendar(year,month){
                     var dateData=("0000"+year).slice(-4)+("00"+(month)).slice(-2)+("00"+(daycount)).slice(-2);
                     for(var i=0;i<schedules.length;i++){
                         if(schedules[i].data.date===dateData){
+                            if(schedules[i].data.importance==0){
+                                schedules[i].data.importanceMark="△";
+                            }else if(schedules[i].data.importance==1){
+                                schedules[i].data.importanceMark="○";
+                            }else{
+                                schedules[i].data.importanceMark="◎"
+                            }
                             schedule.push(schedules[i]);       
                         }
                     }

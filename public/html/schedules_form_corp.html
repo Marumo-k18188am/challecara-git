@@ -16,6 +16,8 @@
             <button v-on:click="back()" id="backButton">戻る</button>
 
             <div>
+                <div>タグ</div>
+            <div>
                 <div>タイトル</div>
                 <input type="text" v-model="title" v-bind:disabled="mode == 'view'">
             </div>
@@ -44,6 +46,7 @@
                 <div>コメント</div>
                 <textarea v-model="comment" v-bind:disabled="mode == 'view'"></textarea>
             </div>
+
         </div>
 
         <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -56,6 +59,7 @@
 
         <script src="../js/firebase.js"></script>
         <script src = "../js/vue.js"></script>
-        <script src = "../js/schedules_form.js"></script>
+        <script src = "../js/hobbyChooser.js"></script>
+        <script src = "../js/schedules_form_corp.js"></script>
     </body>
 </html>

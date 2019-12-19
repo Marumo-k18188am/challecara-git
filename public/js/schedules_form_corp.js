@@ -22,6 +22,7 @@ const form = new Vue({
         place: "",
         capacity: "",
         comment: "",
+        tags: "",
     },
     methods: {
         addSchedule(){
@@ -54,7 +55,7 @@ const form = new Vue({
             this.mode = "edit";
         },
         back() {
-            console.log("**関数の中にいる**");
+            history.back();
         },
         setDate(a) {
             this.date = a.substr(0,4) + "/" + a.substr(4,2) + "/" + a.substr(6,2);
@@ -79,6 +80,9 @@ const form = new Vue({
                 )
             }
         },
+        setTags(){
+            this.tags=getTag()
+        }
     }
 })
 

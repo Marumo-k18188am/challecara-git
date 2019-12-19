@@ -80,9 +80,11 @@
                 <div v-bind:hidden="!found">{{schedules.length}}件の予定</div>
                 <div class="ts-schedules" v-for="schedule in schedules" v-bind:style="{
                     'margin-top':(schedule.data.startTime.split(':')[0]*34+17)+'px',
-                    'height':Math.max(30,(schedule.data.endTime.split(':')[0]-schedule.data.startTime.split(':')[0])*34)+'px'}"
+                    'height':Math.max(50,(schedule.data.endTime.split(':')[0]-schedule.data.startTime.split(':')[0])*34)+'px'}"
                 >
                     {{schedule.data.title}}
+                    <br>
+                    重要度:{{schedule.data.importanceMark}}
                     <a v-bind:href="'../html/schedules_form.html?mode=view&id='+schedule.id">編集</a>
                 </div>
                 <table v-bind:hidden="!found">

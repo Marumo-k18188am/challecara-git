@@ -33,44 +33,69 @@
                     <option value=1>法人</option>
                 </select>
                 <br>
-                <div>好きなモノリスト</div>
-                
-                <div id="hobbyChooser">
-                    <input type="text">
-                    <button>検索</button>
-                    <table>
-                        <tr>
-                            <td id="hobbyChooser-art">音楽・芸術</td>
-                            <td id="hobbyChooser-sport">スポーツ</td>
-                        </tr>
-                        <tr>
-                            <td id="hobbyChooser-subc">アニメ・ゲーム</td>
-                            <td id="hobbyChooser-leisure">行楽・レジャー</td>
-                        </tr>
-                        <tr>
-                            <td id="hobbyChooser-cook">料理</td>
-                            <td id="hobbyChooser-handyc">ものづくり</td>
-                        </tr>
-                        <tr>
-                            <td id="hobbyChooser-else">その他</td>
-                        </tr>
-                    </table>
-        
-                    <div hidden>
-                        <ul>
-                            <li>loaded tags are here</li>   
-                        </ul>
-                        <div id="hobbyChooser-newContent">+新しいコンテンツを追加...</li>
-                    </div>
-                    
+                <div v-bind:hidden="(mode==1)">
+                    <div>好きなものリスト</div>
+                    <button v-on:click="showHobbyChooser">追加</button>
+                    <ul>
+                        <li></li>
+                    </ul>    
                 </div>
+                <img src="../images/icon.jpg">
                 
             </div>
-            <img src="../images/icon.jpg">
         </div>
         
-        
-        
+        <div id="hobbyChooser" v-bind:hidden="!isShown">
+                <div id="hobbyChooser-title">好きなものを検索してみましょう!</div>
+                <input type="text" v-model:value="searchValue" v-on:change="inputChanged()">
+                <button>検索</button>
+                <div id="hobbyChooser-menu" v-bind:hidden="(mode!==0)">
+                    <table>
+                        <tr>
+                            <td id="hobbyChooser-art" v-on:click="search(contents.art,1)">{{contents.art}}</td>
+                            <td id="hobbyChooser-sport" v-on:click="search(contents.sport,1)">{{contents.sport}}</td>
+                        </tr>
+                        <tr>
+                            <td id="hobbyChooser-subc" v-on:click="search(contents.subc,1)">{{contents.subc}}</td>
+                            <td id="hobbyChooser-leisure" v-on:click="search(contents.leisure,1)">{{contents.leisure}}</td>
+                        </tr>
+                        <tr>
+                            <td id="hobbyChooser-cook" v-on:click="search(contents.cook,1)">{{contents.cook}}</td>
+                            <td id="hobbyChooser-handyc" v-on:click="search(contents.handyc,1)">{{contents.handyc}}</td>
+                        </tr>
+                        <tr>
+                            <td id="hobbyChooser-else">{{contents.else}}</td>
+                        </tr>
+                    </table>
+                </div>
+    
+                <div id="hobbyChooser-search" v-bind:hidden="(mode!==1)">
+                    <div>"{{searchValue}}"の検索結果</div>
+                    <ul id="hobbyChooser-searchList">
+                        <li v-for="tagName in searchedTags">{{tagName}}</li> 
+                    </ul>
+                    <div id="hobbyChooser-newContent" v-on:click="editNewContent()">+新しいコンテンツを追加...</div>
+                    <div id="hobbyChooser-editNewTag" v-bind:hidden="!editingNewContent">
+                        <div id="hobbyChooser-editNewTag-main">
+                            <div>新しいコンテンツを追加</div>
+                            <br>
+                            <div>ジャンル</div>
+                            <select v-model:value="editingTag.genre">
+                                <option v-for="contentKey in Object.keys(contents)" v-bind:value="contentKey">{{contents[contentKey]}}</option>
+                            </select>
+                            <br>
+                            <div>コンテンツ名</div>
+                            <input type="text" v-model:value="editingTag.name">
+                            <div></div>
+                            <button v-on:click="addContent()">追加</button>
+                            <button v-on:click="closeEditContent()">キャンセル</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <button v-on:click="closeHobbyChooser">閉じる</button>
+                    
+            </div>
 
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
@@ -83,6 +108,7 @@
         <script src="../js/firebase.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         
+        <script src="../js/hobbyChooser.js"></script>
         <script src="../js/setting_profile.js"></script>
         
     </body>
