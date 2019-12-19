@@ -5,6 +5,7 @@ var db = firebase.firestore();
 const hobbyChooser=new Vue({
     el:"#hobbyChooser",
     data:{
+        selectedTags:[],
         tags:{
             art:[],
             sport:[],
@@ -32,13 +33,20 @@ const hobbyChooser=new Vue({
         editingNewContent:false,
         mode:0,
         searchValue:"",
-        searchId:""
+        searchId:"",
+        resultFunction:null
     },
     methods:{
-        showHobbyChooser(){
+        showHobbyChooser(resultFunction,alreadySelectedTags){
             getTag();
+            if(alreadySelectedTags){
+                this.selectedTags=alreadySelectedTags;
+            }
+
+            this.searchValue="";
             this.mode=0;
             this.isShown=true;
+            this.resultFunction=resultFunction;
         },
         closeHobbyChooser(){
             this.isShown=false;
@@ -80,6 +88,19 @@ const hobbyChooser=new Vue({
         },
         setTags(tags){
             this.tags=tags;
+        },
+        tagClicked(value){
+            if(this.selectedTags.indexOf(value)==-1){
+                this.selectedTags.push(value);
+            }else{
+                this.selectedTags=this.selectedTags.filter((item)=>{
+                    return item!==value;
+                });
+            }
+            this.resultFunction(this.selectedTags);
+        },
+        getSelectedTags(){
+            return this.selectedTags;
         }
     }
 });

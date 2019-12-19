@@ -11,8 +11,6 @@
 
     <body>
         <div id="main">
-            <button v-on:click="back()">戻る</button>
-            <br>
             <div id="title">プロフィール設定</div>
 
             <!--
@@ -35,11 +33,14 @@
                 <br>
                 <div v-bind:hidden="(mode==1)">
                     <div>好きなものリスト</div>
-                    <button v-on:click="showHobbyChooser">追加</button>
-                    <ul>
-                        <li></li>
+                    <button v-on:click="showHobbyChooser">編集</button>
+                    <ul id="hobbyList">
+                        <li v-for="tag in selectedTags">{{tag}}</li>
                     </ul>    
                 </div>
+                <button v-on:click="save()">変更を保存</button>
+                <button v-on:click="back()">変更を破棄</button>
+
                 <img src="../images/icon.jpg">
                 
             </div>
@@ -72,7 +73,10 @@
                 <div id="hobbyChooser-search" v-bind:hidden="(mode!==1)">
                     <div>"{{searchValue}}"の検索結果</div>
                     <ul id="hobbyChooser-searchList">
-                        <li v-for="tagName in searchedTags">{{tagName}}</li> 
+                        <li v-for="tagName in searchedTags" v-on:click="tagClicked(tagName)" v-bind:class="{'hobbyChooser-unselectedList':(selectedTags.indexOf(tagName)==-1),'hobbyChooser-selectedList':(selectedTags.indexOf(tagName)!=-1)}">
+                            {{tagName}}
+                            <div>✔</div>
+                        </li> 
                     </ul>
                     <div id="hobbyChooser-newContent" v-on:click="editNewContent()">+新しいコンテンツを追加...</div>
                     <div id="hobbyChooser-editNewTag" v-bind:hidden="!editingNewContent">
