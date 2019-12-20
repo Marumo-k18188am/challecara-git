@@ -22,6 +22,9 @@ const userData=new Vue({
         getDisplayName(){
             return this.user.displayName;
         },
+        getMode(){
+            return this.mode;
+        },
         getUserId(){
             return this.user.uid;
         },

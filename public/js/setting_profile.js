@@ -6,11 +6,22 @@ const main=new Vue({
     el:"#main",
     data:{
         user:{},
-        mode:-1
+        mode:-1,
+        selectedTags:[]
     },
     methods:{
         back(){
-            window.location.href="../html/calendar.html";
+            var result=confirm("変更は破棄されます。よろしいですか?");
+            if(result)window.location.href="../html/calendar.html";
+        },
+
+        save(){
+            var userdata=this.user;
+            db.collection("users").doc(userdata.uid).collection("userdata").doc("hobbies").set({
+                hobbies:this.selectedTags
+            }).then(()=>{
+                window.location.href="../html/calendar.html";
+            });
         },
 
         switchMode(){
@@ -28,7 +39,7 @@ const main=new Vue({
                     }).then(()=>{
                         window.location.href="../html/calendar.html";
                     });
-                })
+                });
             }else{
                 this.mode=Math.abs(this.mode-1);
             }
@@ -55,9 +66,14 @@ const main=new Vue({
         setMode(mode){
             this.mode=mode;
         },
+        setSelectedTags(selectedTags){
+            this.selectedTags=selectedTags;
+            this.selectedTags.sort();
+        },
         showHobbyChooser(){
-            hobbyChooser.showHobbyChooser();
-        }
+            hobbyChooser.showHobbyChooser(this.setSelectedTags,this.selectedTags);
+        },
+        
     }
 });
 
@@ -68,6 +84,8 @@ firebase.auth().onAuthStateChanged(function(user){
             docs.forEach((doc)=>{
                 if(doc.id=="mode"){
                     main.setMode(doc.data().mode);
+                }else if(doc.id=="hobbies"){
+                    main.setSelectedTags(doc.data().hobbies);
                 }
             });
         });

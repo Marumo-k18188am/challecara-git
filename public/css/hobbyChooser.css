@@ -71,12 +71,32 @@
     padding-inline-start: 0;
 }
 
-#hobbyChooser li{
+.hobbyChooser-unselectedList{
     user-select: none;
     list-style: none;
     padding:10px;
     padding-left:0;
     border: 1px solid lightgray;
+    border-spacing: 0;
+}
+
+.hobbyChooser-unselectedList>div{
+    display:none;
+}
+
+.hobbyChooser-selectedList{
+    user-select: none;
+    list-style: none;
+    padding:10px;
+    padding-left:0;
+    background-color: #f0f0ff;
+    border: 2px solid dodgerblue;
+    border-spacing: 0;
+}
+
+.hobbyChooser-selectedList>div{
+    float: right;
+    color:limegreen;
 }
 
 #hobbyChooser-newContent{
