@@ -213,7 +213,12 @@ const timeschedule=new Vue({
                 }
             },
             toSchedulesForm(){
-                window.location.href="../html/schedules_form.html?mode=add&date="+this.date;
+                if(userData.mode == 0) {
+                    window.location.href="../html/schedules_form.html?mode=add&date="+this.date;   
+                }
+                else if(userData.mode == 1) {
+                    window.location.href="../html/schedules_form_corp.html?mode=add&date="+this.date;
+                }
             }
         }
     });

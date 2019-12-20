@@ -3,7 +3,6 @@ body{
     color:lightslategray;
 }
 div{
-    color: lightslategray;
     margin: 20px 0 0;
 }
 
@@ -16,7 +15,6 @@ button{
     padding-left: 15px;
     padding-right: 15px;
     height: 30px;
-    text-align: right;
 }
 
 button:hover{
@@ -54,7 +52,18 @@ textarea{
     font-size: 22px;
 }
 
-#importanceSlider{
-    padding: 5px;
-    width: 30%;
+#backButton{
+    margin-right: 0px;
+    margin-left: auto;
+    color: dodgerblue;
+    background-color: white;
+    border: 1px solid dodgerblue;
+    border-radius: 10%;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 30px;
+}
+
+#backButton:hover{
+    border-width: 2px;
 }
