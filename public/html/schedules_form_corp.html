@@ -4,7 +4,7 @@
         <meta charset = "UTF-8">
         <title>Form</title>
         <link rel="icon" href="../images/favicon.ico">
-        <link rel="StyleSheet" href="../css/schedules_form.css">
+        <link rel="StyleSheet" href="../css/schedules_form_corp.css">
     </head>
 
     <body>
@@ -13,8 +13,10 @@
             <button v-on:click="addSchedule()" v-if="mode == 'add'">追加</button>
             <button v-on:click="chaengeMode()" v-else-if="mode == 'view'">内容を修正する</button>
             <button v-on:click="editSchedule()" v-else>修正</button>
-            <button id="backButton" v-on:click="">戻る</button>
+            <button v-on:click="back()" id="backButton">戻る</button>
 
+            <div>
+                <div>タグ</div>
             <div>
                 <div>タイトル</div>
                 <input type="text" v-model="title" v-bind:disabled="mode == 'view'">
@@ -44,6 +46,7 @@
                 <div>コメント</div>
                 <textarea v-model="comment" v-bind:disabled="mode == 'view'"></textarea>
             </div>
+
         </div>
 
         <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -56,6 +59,7 @@
 
         <script src="../js/firebase.js"></script>
         <script src = "../js/vue.js"></script>
+        <script src = "../js/hobbyChooser.js"></script>
         <script src = "../js/schedules_form_corp.js"></script>
     </body>
 </html>

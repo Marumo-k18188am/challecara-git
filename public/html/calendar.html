@@ -85,7 +85,7 @@
                     {{schedule.data.title}}
                     <br>
                     重要度:{{schedule.data.importanceMark}}
-                    <a v-bind:href="'../html/schedules_form.html?mode=view&id='+schedule.id">編集</a>
+                    <a v-bind:href="'../html/schedules_form_corp.html?mode=view&id='+schedule.id">編集</a>
                 </div>
                 <table v-bind:hidden="!found">
                     <tr v-for="time in times">

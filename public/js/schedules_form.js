@@ -67,6 +67,9 @@ const form = new Vue({
                 this.importanceMark = "◎";
             }
         },
+        back(){
+            history.back();
+        },
         setDate(a){
             this.date = a.substr(0,4) + "/" + a.substr(4,2) + "/" + a.substr(6,2);
         },
