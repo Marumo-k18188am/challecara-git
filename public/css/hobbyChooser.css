@@ -1,28 +1,29 @@
 #hobbyChooser{
     background-color: white;
     color:lightslategray;
-    font-size:28px;
+    font-size:24px;
     text-align: center;
     position: absolute;
     top:0;
     left:0;
     right:0;
     bottom:0;
-    width:455px;
-    height:500px;
+    width:454px;
+    height:550px;
     margin: auto;
     border:1px solid dodgerblue;
 }
 
 #hobbyChooser input{
     margin-bottom:30px;
-    font-size: 28px;
+    font-size: 24px;
     color:lightslategray;
     border: none;
     border-bottom: 1px solid lightgray;
 }
 
 #hobbyChooser table{
+    margin: 2px;
     border-spacing: 0;
     border-collapse: collapse;
 }
@@ -30,9 +31,12 @@
 #hobbyChooser td{
     padding:15px;
     user-select: none;
+    margin: 1px;
+    width: 225px;
 }
 
 #hobbyChooser-title{
+    margin: 0px;
     height:50px;
     color:whitesmoke;
     background-color: dodgerblue;

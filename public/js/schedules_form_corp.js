@@ -22,7 +22,7 @@ const form = new Vue({
         place: "",
         capacity: "",
         comment: "",
-        tags: "",
+        selectedTags: [], 
     },
     methods: {
         addSchedule(){
@@ -34,6 +34,7 @@ const form = new Vue({
                 place: this.place,
                 capacity: this.capacity,
                 comment: this.comment,
+                tags: this.selectedTags,
             }).then(()=>{
                 window.location.href="../html/calendar.html"
             });
@@ -41,17 +42,18 @@ const form = new Vue({
         editSchedule(){
             db.collection("users").doc(userdata.uid).collection("schedules").doc(this.id).set({
                 title: this.title,
-                date: this.date,
+                date: this.date.substr(0,4) + this.date.substr(5,2) + this.date.substr(8,2),
                 startTime: this.startTime,
                 endTime: this.endTime,
                 place: this.place,
                 capacity: this.capacity,
                 comment: this.comment,
+                tags: this.selectedTags,
             }).then(()=>{
                 window.location.href="../html/calendar.html"
             });
         },
-        chengeMode() {
+        changeMode() {
             this.mode = "edit";
         },
         back() {
@@ -65,10 +67,10 @@ const form = new Vue({
             if(this.mode == "add"){
                 this.setDate(getQueries().date);
             }
-            else if(this.mode == "edit"){
+            else if(this.mode == "view"){
                 db.collection("users").doc(userdata.uid).collection("schedules").doc(getQueries().id).get().then(
                     function(doc){
-                        form.id=getQUeries().id;
+                        form.id=getQueries().id;
                         form.setDate(doc.data().date);
                         form.title=doc.data().title;
                         form.startTime=doc.data().startTime;
@@ -76,13 +78,22 @@ const form = new Vue({
                         form.place=doc.data().place;
                         form.capacity=doc.data().capacity;
                         form.comment=doc.data().comment;
+                        form.selectedTags=doc.data().tags;
                     }
                 )
             }
         },
         setTags(){
             this.tags=getTag()
-        }
+        },
+        setSelectedTags(selectedTags){
+            this.selectedTags=selectedTags;
+            this.selectedTags.sort();
+        },
+        showHobbyChooser(){
+            hobbyChooser.showHobbyChooser(this.setSelectedTags,this.selectedTags);
+        },
+        
     }
 })
 

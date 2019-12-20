@@ -212,13 +212,24 @@ const timeschedule=new Vue({
                     }
                 }
             },
-            toSchedulesForm(){
-                if(userData.mode == 0) {
-                    window.location.href="../html/schedules_form.html?mode=add&date="+this.date;   
+            toSchedulesForm(scheduleId){
+                if(scheduleId!==""){
+                    if(userData.getMode() == 0) {
+                        window.location.href='../html/schedules_form.html?mode=view&id='+scheduleId;   
+                    }
+                    else if(userData.getMode() == 1) {
+                        window.location.href='../html/schedules_form_corp.html?mode=view&id='+scheduleId;
+                    } 
+                }else{
+                    if(userData.getMode() == 0) {
+                        window.location.href="../html/schedules_form.html?mode=add&date="+this.date;   
+                    }
+                    else if(userData.getMode() == 1) {
+                        window.location.href="../html/schedules_form_corp.html?mode=add&date="+this.date;
+                    }
                 }
-                else if(userData.mode == 1) {
-                    window.location.href="../html/schedules_form_corp.html?mode=add&date="+this.date;
-                }
+
+                
             }
         }
     });

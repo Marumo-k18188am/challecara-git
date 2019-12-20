@@ -67,3 +67,23 @@ textarea{
 #backButton:hover{
     border-width: 2px;
 }
+
+#hobbyList{
+    margin: 0;
+    padding-left:0;
+    list-style:none;
+    overflow: auto;
+    width:93%;
+    height:100px;
+    border:1px solid dodgerblue;
+}
+
+#hobbyList li{
+    border:1px solid lightgray;
+    color:lightslategray;
+    font: 400 25px Arial;
+}
+
+.hobbyListDisabled{
+    background-color: rgb(235, 235, 228);
+}
