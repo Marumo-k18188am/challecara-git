@@ -26,8 +26,9 @@ const form = new Vue({
     },
     methods: {
         addSchedule(){
-            db.collection("users").doc(userdata.uid).collection("schedules").doc().set({
+            db.collection("public").doc().set({
                 title: this.title,
+                ownerId:userdata.uid,
                 date: this.date.substr(0,4) + this.date.substr(5,2) + this.date.substr(8,2),
                 startTime: this.startTime,
                 endTime: this.endTime,
@@ -40,8 +41,9 @@ const form = new Vue({
             });
         },
         editSchedule(){
-            db.collection("users").doc(userdata.uid).collection("schedules").doc(this.id).set({
+            db.collection("public").doc(this.id).set({
                 title: this.title,
+                ownerId:userdata.uid,
                 date: this.date.substr(0,4) + this.date.substr(5,2) + this.date.substr(8,2),
                 startTime: this.startTime,
                 endTime: this.endTime,
@@ -68,17 +70,22 @@ const form = new Vue({
                 this.setDate(getQueries().date);
             }
             else if(this.mode == "view"){
-                db.collection("users").doc(userdata.uid).collection("schedules").doc(getQueries().id).get().then(
-                    function(doc){
-                        form.id=getQueries().id;
-                        form.setDate(doc.data().date);
-                        form.title=doc.data().title;
-                        form.startTime=doc.data().startTime;
-                        form.endTime=doc.data().endTime;
-                        form.place=doc.data().place;
-                        form.capacity=doc.data().capacity;
-                        form.comment=doc.data().comment;
-                        form.selectedTags=doc.data().tags;
+                db.collection("public").get().then(
+                    function(snapshot){
+                        var docs=snapshot.docs;
+                        docs.forEach((doc)=>{
+                            if(doc.id==getQueries().id){
+                                form.id=getQueries().id;
+                                form.setDate(doc.data().date);
+                                form.title=doc.data().title;
+                                form.startTime=doc.data().startTime;
+                                form.endTime=doc.data().endTime;
+                                form.place=doc.data().place;
+                                form.capacity=doc.data().capacity;
+                                form.comment=doc.data().comment;
+                                form.selectedTags=doc.data().tags;
+                            }
+                        });
                     }
                 )
             }

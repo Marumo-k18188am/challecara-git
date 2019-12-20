@@ -21,14 +21,14 @@
             <div class="menu-item">
                 <ul>
                     <li>
-                        <a class="notnowhere" href="calendar.html">
+                        <a class="notnowhere" href="../html/calendar.html">
                             <img src="../images/home_2.png" alt="ホーム">
                             <div>ホーム</div>
                         </a>
                     </li>
                     <li>
-                        <a class="notnowhere">
-                            <img src="../images/notification.png" alt="イベント通知">
+                        <a class="notnowhere"  v-bind:class="{'notification-ringing':ringing}" href="../html/info.html">
+                            <img v-bind:src="notificationSrc" alt="イベント通知">
                             <div>イベント通知</div>
                         </a>
                     </li>
@@ -44,7 +44,7 @@
             <div class="menu-item-last">
                 <ul>
                     <li>
-                        <a class="nowhere">
+                        <a class="nowhere" href="../html/setting_menu.html">
                             <img src="../images/setting.png" alt="設定">
                             <div>設定</div>
                         </a>

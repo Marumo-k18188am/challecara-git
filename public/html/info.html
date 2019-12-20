@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="icon" href="../images/favicon.ico">
+        <link rel="StyleSheet" href="../css/menubar.css">
+        <link rel="StyleSheet" href="../css/info.css">
+    </head>
+
+    <body>
+        <div id="menu" class="userData">
+            <div id="menu-profile" class="menu-item" v-bind:hidden="hidden">
+                <img id="menu-icon" v-bind:src="getPhotoURL()" alt="アイコン">
+                <div id="menu-username">{{getDisplayName()}}</div>
+                <div id="menu-despriction">{{getModeText()}}のユーザー</div>
+                <button id="menu-button" v-on:click="toSetProfile()">プロフィール設定</button>
+            </div>
+
+            <div class="menu-item">
+                <ul>
+                    <li>
+                        <a class="notnowhere" href="../html/calendar.html">
+                            <img src="../images/home_2.png" alt="ホーム">
+                            <div>ホーム</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nowhere"  v-bind:class="{'notification-ringing':ringing}" href="../html/info.html">
+                            <img v-bind:src="notificationSrc" alt="イベント通知">
+                            <div>イベント通知</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="notnowhere">
+                            <img src="../images/community.png" alt="コミュニティー">
+                            <div>コミュニティー</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-item-last">
+                <ul>
+                    <li>
+                        <a class="notnowhere" href="../html/setting_menu.html">
+                            <img src="../images/setting.png" alt="設定">
+                            <div>設定</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="main">
+            <div>一週間以内でおすすめのイベント</div>
+            <ul>
+                <li v-for="event in events">
+                    <div class="eventList-title">{{event.title}}</div>
+                    <div>開催日時:{{(event.date.substr(0,4) + "/" + event.date.substr(4,2) + "/" + event.date.substr(6,2))}} {{event.startTime}}より</div>
+                    <button v-on:click="showData(event)">詳細</button>
+                </li>
+            </ul>
+
+            <div id="form" v-bind:hidden="!dataShown">
+                <div id="form-main">
+                
+                    <button v-on:click="close()">閉じる</button>
+    
+                    <div>
+                        <div class="eventData-title">タイトル</div>
+                        <div class="eventData-data">{{selectedEvent.title}}</div>
+                    </div>
+    
+                    <div>
+                        <div class="eventData-title">開始時刻</div>
+                        <div class="eventData-data">{{selectedEvent.startTime}}</div>
+                    </div>
+    
+                    <div>
+                        <div class="eventData-title">終了時刻</div class="eventData-title">
+                            <div class="eventData-data">{{selectedEvent.endTime}}</div>
+                    </div>
+    
+                    <div>
+                        <div class="eventData-title">場所</div class="eventData-title">
+                            <div class="eventData-data">{{selectedEvent.place}}</div>
+                    </div>
+    
+                    <div>
+                        <div class="eventData-title">定員</div class="eventData-title">
+                        <div class="eventData-data">{{selectedEvent.capacity}}</div>
+                    </div>
+    
+                    
+                    <div>
+                        <div class="eventData-title">タグ</div class="eventData-title">
+                        <ul id="hobbyList">
+                            <li v-for="tag in selectedEvent.tags">{{tag}}</li>
+                        </ul>
+                    </div>
+    
+                    <div>
+                        <div class="eventData-title">コメント</div class="eventData-title">
+                        <div class="eventData-data">{{selectedEvent.comment}}</div>
+                    </div>
+
+                    <button v-on:click="addToSchedule()">予定に追加する</button>
+                    <br>
+                </div>
+            </div>    
+        </div>
+
+        
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#config-web-app -->
+            <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+
+        <script src="../js/firebase.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="../js/userdata.js"></script>
+        <script src="../js/info.js"></script>
+    </body>
+</html>

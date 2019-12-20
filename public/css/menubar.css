@@ -21,6 +21,10 @@
     border-radius:50%;
 }
 
+.notification-ringing{
+    background-color:palegoldenrod;
+}
+
 #menu{
     float: left;
     width:20%;

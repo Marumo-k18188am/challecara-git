@@ -28,8 +28,8 @@
                             </a>
                         </li>
                         <li>
-                            <a class="notnowhere">
-                                <img src="../images/notification.png" alt="イベント通知">
+                            <a class="notnowhere"  v-bind:class="{'notification-ringing':ringing}" href="info.html">
+                                <img v-bind:src="notificationSrc" alt="イベント通知">
                                 <div>イベント通知</div>
                             </a>
                         </li>
@@ -84,7 +84,7 @@
                 >
                     {{schedule.data.title}}
                     <br>
-                    重要度:{{schedule.data.importanceMark}}
+                    <div v-bind:hidden="(mode==1)">重要度:{{schedule.data.importanceMark}}</div>
                     <a v-on:click="toSchedulesForm(schedule.id)">編集</a>
                 </div>
                 <table v-bind:hidden="!found">

@@ -14,7 +14,15 @@ var month=thisMonth;
 //ページ描画
 firebase.auth().onAuthStateChanged(function(user){
     if(user){
-        createCalendar(year,month);
+        db.collection("users").doc(user.uid).collection("userdata").get().then((snapshot)=>{
+            var docs=snapshot.docs;
+            docs.forEach((doc)=>{
+                if(doc.id=="mode"){
+                    calendar.setMode(doc.data().mode);
+                }
+            });
+            createCalendar(year,month);
+        });
     }
 });
 
@@ -22,6 +30,7 @@ firebase.auth().onAuthStateChanged(function(user){
 const calendar=new Vue({
     el:"#calendar",
     data:{
+        mode:-1,
         head:"",
         date:{},
         weeks:[],
@@ -43,6 +52,14 @@ const calendar=new Vue({
             this.weeks=[];
             this.td=[];
             this.selectedDay=-1;
+        },
+
+        getMode(){
+            return this.mode;
+        },
+
+        setMode(mode){
+            this.mode=mode;
         },
 
         setHead(head){
@@ -99,78 +116,149 @@ function createCalendar(year,month){
     calendar.init();
     calendar.setHead(year+" / "+("00"+month).slice(-2));
 
-    db.collection("users").doc(userData.getUserId()).collection("schedules").get().then(function(querySnapshot) {
-        var docs=querySnapshot.docs;
-        docs.forEach((doc)=>{
-            schedules.push({id:doc.id,data:doc.data()});
-        });
-
-        for(var i=0;i<weeks.length;i++){
-            if(i===0)calendar.addWeek({weekname:weeks[i],class:["sunday"]});
-            else if(i===6)calendar.addWeek({weekname:weeks[i],class:["saturday"]});
-            else calendar.addWeek({weekname:weeks[i],class:["weekday"]});
-        }
+    if(calendar.getMode()==0){
+        db.collection("users").doc(userData.getUserId()).collection("schedules").get().then(function(querySnapshot) {
+            var docs=querySnapshot.docs;
+            docs.forEach((doc)=>{
+                schedules.push({id:doc.id,data:doc.data()});
+            });
     
-        for(var week=0;week<6;week++){
-            aweek=[];
-    
-            for(var day=0;day<7;day++){
-                if(week===0 && day<startDay){
-                    aweek.push({daynum:"",schedules:[],date:{year:null,month:null,day:null},disabled:false,class:["weekday"]});
-                }else if(daycount>endDayCount){
-                    if(day===0) break;
-                    else aweek.push({daynum:"",schedules:[],date:{year:null,month:null,day:null},disabled:false,class:["weekday"]});
-                }else{
-                    classes=[];
-                    
-                    if(day===0)classes.push("sunday");
-                    else if(day===6) classes.push("saturday");
-                    else classes.push("weekday");
-                    
-                    var schedule=[];
-                    var dateData=("0000"+year).slice(-4)+("00"+(month)).slice(-2)+("00"+(daycount)).slice(-2);
-                    for(var i=0;i<schedules.length;i++){
-                        if(schedules[i].data.date===dateData){
-                            if(schedules[i].data.importance==0){
-                                schedules[i].data.importanceMark="△";
-                            }else if(schedules[i].data.importance==1){
-                                schedules[i].data.importanceMark="○";
-                            }else{
-                                schedules[i].data.importanceMark="◎"
-                            }
-                            schedule.push(schedules[i]);       
-                        }
-                    }
-                    if(year===thisYear&&month===thisMonth&&daycount===today+1&&schedule.length>0){
-                    var count=schedule.length;
-                    Notification.requestPermission(function(result) {
-                        if (result === 'denied') {
-                            alert("明日は"+count+"件の用事があります.");
-                        } else if (result === 'default') {
-                            alert("明日は"+count+"件の用事があります.");
-                        } else if (result === 'granted') {
-                            var n=new Notification("明日は"+count+"件の用事があります.");
-                        }
-                        });
-                    }
-                    if(year===thisYear&&month===thisMonth&&daycount===today){
-                        classes.push("today");
-                        createTimeSchedule(year,month,daycount,false,schedule);
-                    };
-                    if(daycount<today)aweek.push({daynum:daycount,schedules:schedule,date:{year:year,month:month,day:daycount},disabled:false,class:classes});
-                    else aweek.push({daynum:daycount,schedules:schedule,date:{year:year,month:month,day:daycount},disabled:true,class:classes});
-                    daycount++;
-                }
+            for(var i=0;i<weeks.length;i++){
+                if(i===0)calendar.addWeek({weekname:weeks[i],class:["sunday"]});
+                else if(i===6)calendar.addWeek({weekname:weeks[i],class:["saturday"]});
+                else calendar.addWeek({weekname:weeks[i],class:["weekday"]});
             }
-            calendar.addTd(aweek);
-        }
-    });
+        
+            for(var week=0;week<6;week++){
+                aweek=[];
+        
+                for(var day=0;day<7;day++){
+                    if(week===0 && day<startDay){
+                        aweek.push({daynum:"",schedules:[],date:{year:null,month:null,day:null},disabled:false,class:["weekday"]});
+                    }else if(daycount>endDayCount){
+                        if(day===0) break;
+                        else aweek.push({daynum:"",schedules:[],date:{year:null,month:null,day:null},disabled:false,class:["weekday"]});
+                    }else{
+                        classes=[];
+                        
+                        if(day===0)classes.push("sunday");
+                        else if(day===6) classes.push("saturday");
+                        else classes.push("weekday");
+                        
+                        var schedule=[];
+                        var dateData=("0000"+year).slice(-4)+("00"+(month)).slice(-2)+("00"+(daycount)).slice(-2);
+                        for(var i=0;i<schedules.length;i++){
+                            if(schedules[i].data.date===dateData){
+                                if(schedules[i].data.importance==0){
+                                    schedules[i].data.importanceMark="△";
+                                }else if(schedules[i].data.importance==1){
+                                    schedules[i].data.importanceMark="○";
+                                }else{
+                                    schedules[i].data.importanceMark="◎"
+                                }
+                                schedule.push(schedules[i]);       
+                            }
+                        }
+                        if(year===thisYear&&month===thisMonth&&daycount===today+1&&schedule.length>0){
+                        var count=schedule.length;
+                        Notification.requestPermission(function(result) {
+                            if (result === 'denied') {
+                                alert("明日は"+count+"件の用事があります.");
+                            } else if (result === 'default') {
+                                alert("明日は"+count+"件の用事があります.");
+                            } else if (result === 'granted') {
+                                var n=new Notification("明日は"+count+"件の用事があります.");
+                            }
+                            });
+                        }
+                        if(year===thisYear&&month===thisMonth&&daycount===today){
+                            classes.push("today");
+                            createTimeSchedule(year,month,daycount,false,schedule);
+                        };
+                        if(daycount<today)aweek.push({daynum:daycount,schedules:schedule,date:{year:year,month:month,day:daycount},disabled:false,class:classes});
+                        else aweek.push({daynum:daycount,schedules:schedule,date:{year:year,month:month,day:daycount},disabled:true,class:classes});
+                        daycount++;
+                    }
+                }
+                calendar.addTd(aweek);
+            }
+        });
+    }else{
+        db.collection("public").get().then(function(querySnapshot) {
+            var docs=querySnapshot.docs;
+            docs.forEach((doc)=>{
+                if(doc.data().ownerId==userData.getUserId())schedules.push({id:doc.id,data:doc.data()});
+            });
+    
+            for(var i=0;i<weeks.length;i++){
+                if(i===0)calendar.addWeek({weekname:weeks[i],class:["sunday"]});
+                else if(i===6)calendar.addWeek({weekname:weeks[i],class:["saturday"]});
+                else calendar.addWeek({weekname:weeks[i],class:["weekday"]});
+            }
+        
+            for(var week=0;week<6;week++){
+                aweek=[];
+        
+                for(var day=0;day<7;day++){
+                    if(week===0 && day<startDay){
+                        aweek.push({daynum:"",schedules:[],date:{year:null,month:null,day:null},disabled:false,class:["weekday"]});
+                    }else if(daycount>endDayCount){
+                        if(day===0) break;
+                        else aweek.push({daynum:"",schedules:[],date:{year:null,month:null,day:null},disabled:false,class:["weekday"]});
+                    }else{
+                        classes=[];
+                        
+                        if(day===0)classes.push("sunday");
+                        else if(day===6) classes.push("saturday");
+                        else classes.push("weekday");
+                        
+                        var schedule=[];
+                        var dateData=("0000"+year).slice(-4)+("00"+(month)).slice(-2)+("00"+(daycount)).slice(-2);
+                        for(var i=0;i<schedules.length;i++){
+                            if(schedules[i].data.date===dateData){
+                                if(schedules[i].data.importance==0){
+                                    schedules[i].data.importanceMark="△";
+                                }else if(schedules[i].data.importance==1){
+                                    schedules[i].data.importanceMark="○";
+                                }else{
+                                    schedules[i].data.importanceMark="◎"
+                                }
+                                schedule.push(schedules[i]);       
+                            }
+                        }
+                        if(year===thisYear&&month===thisMonth&&daycount===today+1&&schedule.length>0){
+                        var count=schedule.length;
+                        Notification.requestPermission(function(result) {
+                            if (result === 'denied') {
+                                alert("明日は"+count+"件の用事があります.");
+                            } else if (result === 'default') {
+                                alert("明日は"+count+"件の用事があります.");
+                            } else if (result === 'granted') {
+                                var n=new Notification("明日は"+count+"件の用事があります.");
+                            }
+                            });
+                        }
+                        if(year===thisYear&&month===thisMonth&&daycount===today){
+                            classes.push("today");
+                            createTimeSchedule(year,month,daycount,true,schedule);
+                        };
+                        if(daycount<today)aweek.push({daynum:daycount,schedules:schedule,date:{year:year,month:month,day:daycount},disabled:false,class:classes});
+                        else aweek.push({daynum:daycount,schedules:schedule,date:{year:year,month:month,day:daycount},disabled:true,class:classes});
+                        daycount++;
+                    }
+                }
+                calendar.addTd(aweek);
+            }
+        });
+    }
+    
 }
 
 //タイムスケジュール生成
 const timeschedule=new Vue({
         el:"#timeschedule",
         data:{
+            mode:-1,
             head:"",
             date:"",
             found:false,
@@ -181,6 +269,7 @@ const timeschedule=new Vue({
         },
         methods:{
             init(){
+                this.mode=userData.getMode();
                 this.schedules=[];
                 this.head="";
                 this.date="";
